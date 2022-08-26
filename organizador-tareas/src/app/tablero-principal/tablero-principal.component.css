@@ -1,0 +1,20 @@
+.btn{
+    margin-left: 2%;
+}
+
+.divMain{
+    margin: 2%;
+}
+
+.headerTable {
+    background-color: #3f51b5;
+    color: white;
+    text-align: left;
+    font-size: 14px;
+}
+
+table {
+    text-align: justify;
+    margin: auto;
+    width: 100%;
+}
