@@ -15,8 +15,10 @@
   </button>
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
    <mat-icon>share</mat-icon>
- </button-->
-        <button type="button" mat-raised-button color="primary" class="btn" data-toggle="modal" data-target="#modalCrearTablero">Crear Tablero</button>
+ <-- Button modal Crear proyecto-->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearProyecto">
+  Crear proyecto
+</button>
     </mat-toolbar>
 </p>
 
@@ -76,23 +78,72 @@
 </div>
 
 <!--Modal crear tablero-->
-<div class="modal fade" id="modalCrearTablero" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="modalCrearProyecto" tabindex="-1" aria-labelledby="modalCrearProyectoLabel" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+       <h1 class="modal-title" id="modalCrearProyectoLabel">Nuevo proyecto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        <!--Formulario-->
+        <!--<div class="form-floating mb-3">
+          <input type="nombreProyecto" class="form-control is-invalid" id="floatingInput" placeholder=" " required>
+          <label for="floatingInput">Nombre del proyecto</label>
+          <div id="validationServer03Feedback" class="invalid-feedback">
+            Debe ingresar un nombre para el proyecto.
+          </div>
+        </div>-->
+        <!--Nombre del proyecto-->
+          <form class="was-validated">
+            <div class="mb-3">
+              <label for="floatingInput">Nombre del proyecto</label>
+              <textarea class="form-control" id="validationTextarea" placeholder="" required></textarea>
+              <div class="invalid-feedback">
+                Debe ingresar un nombre para el proyecto.
+              </div>
+            </div>
+        </form>
+        <!--Equipo-->
+        <div class="row g-2">
+          <div class="col-md">
+            <div class="form-floating">
+              <input type="equipo" class="form-control" id="floatingInputGrid" placeholder="" value="equipo">
+              <label for="floatingInputGrid">Equipo</label>
+            </div>
+          </div>
+          <!--Privacidad-->
+          <div class="col-md">
+            <div class="form-floating">
+              <select class="form-select" id="floatingSelectGrid">
+                <option value="publico">Publico para el equipo</option>
+                <option value="privado">Privado para los miembros del proyecto</option>
+              </select>
+              <label for="floatingSelectGrid">Privacidad</label>
+            </div>
+          </div>
+        </div>
+        <br>
+        <!--Vistas-->
+        <label >Vista de proyecto</label>
+        <br>
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
+          <button type="button" class="btn btn-outline-primary" data-bs-target="#lista">Lista</button>
+          <button type="button" class="btn btn-outline-primary" data-bs-target="#">Tablero</button>
+          <button type="button" class="btn btn-outline-primary" data-bs-target="#">Cronograma</button>
+          <button type="button" class="btn btn-outline-primary" data-bs-target="#">Calendario</button>
+        </div>
+
+       
+        
+        <!--Fin Formulario-->
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>
 </div>
+<!--Fin Modal crear tablero-->
 
