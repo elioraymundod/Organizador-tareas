@@ -18,8 +18,5 @@ export class TableroPrincipalComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  ingresarTablero(){
-    $('#crearTableroModal').modal('show');
-  }
 
 }

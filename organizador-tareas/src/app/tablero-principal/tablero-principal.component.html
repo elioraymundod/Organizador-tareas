@@ -1,12 +1,12 @@
 <p>
     <mat-toolbar>
-        <button mat-icon-button class="example-icon" 
+        <button mat-icon-button class="example-icon botones" 
             [matMenuTriggerFor]="menu">
             <mat-icon>menu</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item>Acerca de</button>
-            <button mat-menu-item>Cerrar sesion</button>
+            <button mat-menu-item class="botones">Acerca de</button>
+            <button mat-menu-item class="botones">Cerrar sesion</button>
         </mat-menu>
         <span>Organizador de Tareas</span>
         <span class="example-spacer"></span>
@@ -16,7 +16,7 @@
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
    <mat-icon>share</mat-icon>
  </button-->
-        <button mat-raised-button color="primary" class="btn" (click)="ingresarTablero()">Crear Tablero</button>
+        <button type="button" mat-raised-button color="primary" class="btn" data-toggle="modal" data-target="#modalCrearTablero">Crear Tablero</button>
     </mat-toolbar>
 </p>
 
@@ -76,10 +76,23 @@
 </div>
 
 <!--Modal crear tablero-->
-<div class="modal fade bd-example-modal-lg" id="crearTableroModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+<div class="modal fade" id="modalCrearTablero" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
-      ...
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
     </div>
   </div>
 </div>
+

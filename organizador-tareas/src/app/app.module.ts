@@ -10,11 +10,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MaterialExampleModule } from 'src/material.module';
 import * as $ from "jquery";
+import { TablerosComponent } from './tableros/tableros.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TableroPrincipalComponent
+    TableroPrincipalComponent,
+    TablerosComponent
   ],
   imports: [
     BrowserModule,
