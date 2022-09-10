@@ -11,6 +11,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MaterialExampleModule } from 'src/material.module';
 import * as $ from "jquery";
 import { TablerosComponent } from './tableros/tableros.component';
+import { ProyectosServiceService } from './Servicios/proyectos-service.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,9 @@ import { TablerosComponent } from './tableros/tableros.component';
     MaterialExampleModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    ProyectosServiceService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

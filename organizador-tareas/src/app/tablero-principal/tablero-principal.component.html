@@ -89,25 +89,25 @@
       </div>
       <div class="modal-body">
         <!--Formulario-->
-        <!--Nombre del proyecto-->
-        <mat-form-field class="example-full-width col-6" appearance="fill">
-          <mat-label>Nombre del proyecto</mat-label>
-          <input matInput>
-        </mat-form-field>
-        <!--Equipo-->
-        <mat-form-field class="example-full-width col-6" appearance="fill">
-          <mat-label>Abreviatura</mat-label>
-          <input matInput maxlength="3">
-        </mat-form-field>
-        <br>
-        <!--Descripcion-->
-        <mat-form-field class="col-12">
-          <mat-label>Descripcion</mat-label>
-          <textarea matInput #desc placeholder="" maxlength="1000" required></textarea>
-          <mat-hint align="end">{{desc.value.length}} / 1000</mat-hint>
-        </mat-form-field>
-
-
+        <form [formGroup]="crearProyecto">
+          <!--Nombre del proyecto-->
+          <mat-form-field class="example-full-width col-6" appearance="fill">
+            <mat-label>Nombre del proyecto</mat-label>
+            <input matInput formControlName="nombreProyecto">
+          </mat-form-field>
+          <!--Equipo-->
+          <mat-form-field class="example-full-width col-6" appearance="fill">
+            <mat-label>Abreviatura</mat-label>
+            <input matInput maxlength="3" formControlName="abreviatura">
+          </mat-form-field>
+          <br>
+          <!--Descripcion-->
+          <mat-form-field class="col-12">
+            <mat-label>Descripcion</mat-label>
+            <textarea matInput #desc placeholder="" maxlength="1000" required formControlName="descripcion"></textarea>
+            <mat-hint align="end">{{desc.value.length}} / 1000</mat-hint>
+          </mat-form-field>
+        </form>
 
         <!--h3>Tema </h3>
           <div class="btn-group" role="group" aria-label="Basic outlined example">
@@ -119,7 +119,7 @@
         <br>
         <div class="modal-footer">
           <button mat-button data-bs-dismiss="modal">Cancelar</button>
-          <button mat-raised-button color="primary">Crear proyecto</button>
+          <button mat-raised-button color="primary" (click)="guardarProyecto(crearProyecto.value)">Crear proyecto</button>
         </div>
       </div>
     </div>
