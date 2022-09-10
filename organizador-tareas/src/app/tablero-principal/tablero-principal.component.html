@@ -1,147 +1,127 @@
 <p>
-    <mat-toolbar>
-        <button mat-icon-button class="example-icon botones" 
-            [matMenuTriggerFor]="menu">
-            <mat-icon>menu</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-            <button mat-menu-item class="botones">Acerca de</button>
-            <button mat-menu-item class="botones">Cerrar sesion</button>
-        </mat-menu>
-        <span>Organizador de Tareas</span>
-        <span class="example-spacer"></span>
-        <!--button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+  <mat-toolbar>
+    <button mat-icon-button class="example-icon botones" [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item class="botones">Acerca de</button>
+      <button mat-menu-item class="botones">Cerrar sesion</button>
+    </mat-menu>
+    <span>{{titulo}}</span>
+    <span class="example-spacer"></span>
+    <!--button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
     <mat-icon>favorite</mat-icon>
   </button>
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
    <mat-icon>share</mat-icon>
- <-- Button modal Crear proyecto-->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevoProyecto">
-  Nuevo proyecto
-  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
-  </svg>
-</button>
-    </mat-toolbar>
+  <-- Button modal Crear proyecto-->
+    <button mat-raised-button class="btn" color="primary" data-bs-toggle="modal" data-bs-target="#modalNuevoProyecto">
+      Nuevo proyecto
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </mat-toolbar>
 </p>
 
 <div class="divMain">
-    <h1><b>Proyectos</b></h1>
-    <form class="example-form">
-        <mat-form-field class="example-full-width col-3">
-            <mat-label>Realizar busqueda</mat-label>
-            <input matInput>
-        </mat-form-field>
-    </form>
+  <h1><b>Proyectos</b></h1>
+  <form class="example-form">
+    <mat-form-field class="example-full-width col-3">
+      <mat-label>Realizar busqueda</mat-label>
+      <input matInput>
+    </mat-form-field>
+  </form>
 
-    <section>
-        <table mat-table [dataSource]="dataSource">
+  <section>
+    <table mat-table [dataSource]="dataSource">
 
-          <ng-container matColumnDef="Nombre">
-            <th mat-header-cell *matHeaderCellDef class="headerTable"> Nombre </th>
-            <td mat-cell *matCellDef="let element">  </td>
-          </ng-container>
-
-
-          <ng-container matColumnDef="Abreviatura">
-            <th mat-header-cell *matHeaderCellDef class="headerTable"> Abreviatura </th>
-            <td mat-cell *matCellDef="let element">  </td>
-          </ng-container>
+      <ng-container matColumnDef="Nombre">
+        <th mat-header-cell *matHeaderCellDef class="headerTable"> Nombre </th>
+        <td mat-cell *matCellDef="let element"> </td>
+      </ng-container>
 
 
-          <ng-container matColumnDef="Descripcion">
-            <th mat-header-cell *matHeaderCellDef class="headerTable"> Descripcion </th>
-            <td mat-cell *matCellDef="let element">  </td>
-          </ng-container>
+      <ng-container matColumnDef="Abreviatura">
+        <th mat-header-cell *matHeaderCellDef class="headerTable"> Abreviatura </th>
+        <td mat-cell *matCellDef="let element"> </td>
+      </ng-container>
 
 
-          <ng-container matColumnDef="Responsable">
-            <th mat-header-cell *matHeaderCellDef class="headerTable"> Responsable </th>
-            <td mat-cell *matCellDef="let element">  </td>
-          </ng-container>
+      <ng-container matColumnDef="Descripcion">
+        <th mat-header-cell *matHeaderCellDef class="headerTable"> Descripcion </th>
+        <td mat-cell *matCellDef="let element"> </td>
+      </ng-container>
 
 
-          <ng-container matColumnDef="Acciones">
-            <th mat-header-cell *matHeaderCellDef class="headerTable"> Acciones </th>
-            <td mat-cell *matCellDef="let element"> 
-                <button mat-icon-button title="Ver acciones"> <!--[routerLink]="['detalle', evento.codigoEvento, 9]"-->
-                    <mat-icon>
-                      visibility
-                    </mat-icon>
-                  </button>
-                 </td>
-          </ng-container>
+      <ng-container matColumnDef="Responsable">
+        <th mat-header-cell *matHeaderCellDef class="headerTable"> Responsable </th>
+        <td mat-cell *matCellDef="let element"> </td>
+      </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
 
-        <mat-paginator [pageSizeOptions]="[15]" showFirstLastButtons></mat-paginator>
-      </section>
+      <ng-container matColumnDef="Acciones">
+        <th mat-header-cell *matHeaderCellDef class="headerTable"> Acciones </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button title="Ver acciones">
+            <!--[routerLink]="['detalle', evento.codigoEvento, 9]"-->
+            <mat-icon>
+              visibility
+            </mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[15]" showFirstLastButtons></mat-paginator>
+  </section>
 </div>
 
 <!--Modal crear Proyecto-->
-<div class="modal fade" id="modalNuevoProyecto" tabindex="-1" aria-labelledby="modalNuevoProyectoLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="modal fade bd-example-modal-lg" id="modalNuevoProyecto" tabindex="-1"
+  aria-labelledby="modalNuevoProyectoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-       <h1 class="modal-title" id="modalNuevoProyectoLabel">Nuevo proyecto</h1>
+        <h1 class="modal-title" id="modalNuevoProyectoLabel">Nuevo proyecto</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <!--Formulario-->
         <!--Nombre del proyecto-->
-          <form class="was-validated">
-            <div class="mb-3">
-              <label for="floatingInput" >Nombre del proyecto</label>
-              <textarea class="form-control" id="validationTextarea" placeholder="" required></textarea>
-              <div class="invalid-feedback">
-                Debe ingresar un nombre para el proyecto.
-              </div>
-            </div>
-        </form>
+        <mat-form-field class="example-full-width col-6" appearance="fill">
+          <mat-label>Nombre del proyecto</mat-label>
+          <input matInput>
+        </mat-form-field>
         <!--Equipo-->
-        <div class="row g-2">
-          <div class="col-md">
-            <div class="form-floating">
-              <input type="equipo" class="form-control" id="floatingInputGrid" placeholder="" value="equipo">
-              <label for="floatingInputGrid">Equipo</label>
-            </div>
-          </div>
-          <!--Privacidad-->
-          <div class="col-md">
-            <div class="form-floating">
-              <select class="form-select" id="floatingSelectGrid">
-                <option value="publico">Publico para el equipo</option>
-                <option value="privado">Privado para los miembros del proyecto</option>
-              </select>
-              <label for="floatingSelectGrid">Privacidad</label>
-            </div>
-          </div>
-        </div>
+        <mat-form-field class="example-full-width col-6" appearance="fill">
+          <mat-label>Abreviatura</mat-label>
+          <input matInput maxlength="3">
+        </mat-form-field>
         <br>
-        <!--Descripcion proyecto-->
-          <div class="mb-3">
-            <label for="floatingInput">Descripcion</label>
-            <textarea class="form-control" id="validationTextarea" placeholder="" required></textarea>
-          </div>
-          <br>
-<!--color del tema-->
-<h3>Tema </h3>
-  <div class="btn-group" role="group" aria-label="Basic outlined example">
-      <button type="button" class="btn btn-primary">Azul</button>
-      <button type="button" class="btn btn-success">Verde</button>
-      <button type="button" class="btn btn-warning">Amarillo</button>
-      <button type="button" class="btn btn-dark">Oscuro</button>
-  </div>
-        <!--Fin Formulario-->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Crear</button>
+        <!--Descripcion-->
+        <mat-form-field class="col-12">
+          <mat-label>Descripcion</mat-label>
+          <textarea matInput #desc placeholder="" maxlength="1000" required></textarea>
+          <mat-hint align="end">{{desc.value.length}} / 1000</mat-hint>
+        </mat-form-field>
+
+
+
+        <!--h3>Tema </h3>
+          <div class="btn-group" role="group" aria-label="Basic outlined example">
+              <button type="button" class="btn btn-primary">Azul</button>
+              <button type="button" class="btn btn-success">Verde</button>
+              <button type="button" class="btn btn-warning">Amarillo</button>
+              <button type="button" class="btn btn-dark">Oscuro</button>
+          </div-->
+        <br>
+        <div class="modal-footer">
+          <button mat-button data-bs-dismiss="modal">Cancelar</button>
+          <button mat-raised-button color="primary">Crear proyecto</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<!--Fin Modal crear Proyecto-->
-
+  <!--Fin Modal crear Proyecto-->

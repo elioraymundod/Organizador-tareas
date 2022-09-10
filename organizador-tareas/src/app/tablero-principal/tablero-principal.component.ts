@@ -13,10 +13,12 @@ export class TableroPrincipalComponent implements OnInit {
 
   displayedColumns: string[] = ['Nombre', 'Abreviatura', 'Descripcion', 'Responsable', 'Acciones']
 
-  constructor() { }
+  titulo: String;
+
+  constructor() {
+    this.titulo = 'Organizador de Tareas';
+  }
 
   ngOnInit(): void {
   }
-
-
 }
