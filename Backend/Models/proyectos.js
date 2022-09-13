@@ -18,5 +18,14 @@ module.exports = {
                 else resolve(rows);
             })
         })
+    },
+    
+    getAllProyectos() {
+        return new Promise((resolve, reject) => {
+            con.query('select * from organizador_tareas.proyectos', (err, rows) => {
+                if (err) reject(err);
+                else resolve(rows);
+            })
+        })
     }
 }

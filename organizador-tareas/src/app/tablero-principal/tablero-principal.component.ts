@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ProyectosServiceService } from '../Servicios/proyectos-service.service';
 declare let $: any;
@@ -18,21 +19,26 @@ export class TableroPrincipalComponent implements OnInit {
   crearProyecto: FormGroup
 
   constructor(private _formBuilder: FormBuilder,
-              private proyectosService: ProyectosServiceService) {
+              private proyectosService: ProyectosServiceService,
+              private activatedRoute: ActivatedRoute, 
+              private router: Router) {
     this.titulo = 'Organizador de Tareas';
     this.crearProyecto = this._formBuilder.group({
       nombreProyecto: ['', [Validators.required]],
       abreviatura: ['', [Validators.required]],
       descripcion: ['', [Validators.required]]
-    })
+    });
+
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    //Obtener los tableros y mostrarlos en la tabla
+    await this.obtenerAllTableros();    
   }
 
   guardarProyecto(datos: any){
     const proyecto = {
-      ID: 3,
+      ID: 4,
       NOMBRE: this.crearProyecto.get('nombreProyecto')?.value,
       ABREVIATURA: this.crearProyecto.get('abreviatura')?.value,
       DESCRIPCION: datos.descripcion,
@@ -56,5 +62,18 @@ export class TableroPrincipalComponent implements OnInit {
       })
     })
     console.log(proyecto)
+  }
+
+  async obtenerAllTableros(){
+    this.proyectosService.getAllProyectos().subscribe(res => {
+      this.dataSource.data = res;
+    }, err => {
+      console.error(err);
+    });
+  }
+
+  verTablero(complementoRuta: any){
+    console.log(complementoRuta)
+    this.router.navigate([`tablero/${complementoRuta}`]);
   }
 }

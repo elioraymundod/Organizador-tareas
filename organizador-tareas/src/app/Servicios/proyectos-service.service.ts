@@ -16,4 +16,12 @@ export class ProyectosServiceService {
   public crearProyecto(items: any): Observable<any>{
     return this.http.post(`${this.baseUrl}/proyectos`, items);
   }
+
+  public getProyecto(codigoProyecto: any): Observable<any> {
+    return this.http.get(`${this.baseUrl}/muestras/${codigoProyecto}`);
+  }
+
+  public getAllProyectos(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/obtener/all/proyectos`);
+  }
 }

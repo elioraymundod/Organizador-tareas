@@ -31,4 +31,18 @@ router.get('/proyectos/:codigoProyecto', (req, res) => {
 
 });
 
-module.exports= router;
+router.get('/obtener/all/proyectos', (req, res) => {
+    proyectos.getAllProyectos()
+        .then(proyectos => {
+            res.status(200).send(proyectos);
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).send({
+                mesage: 'Error al obtener datos'
+            });
+        });
+
+});
+
+module.exports = router;

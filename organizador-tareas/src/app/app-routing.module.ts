@@ -9,9 +9,9 @@ const routes: Routes = [
     component: TableroPrincipalComponent
   },
   {
-    path: 'tablero',
+    path: 'tablero/:codigo_tablero',
     component: TablerosComponent
-  },
+  }
 ];
 
 @NgModule({
