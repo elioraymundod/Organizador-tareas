@@ -1,0 +1,72 @@
+<p>
+    <mat-toolbar>
+        <div class="containter col-12">
+            <button mat-icon-button class="example-icon botones" [matMenuTriggerFor]="menu">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item class="botones" (click)="volverMenuPrincipal()">Ver todos los proyectos</button>
+                <button mat-menu-item class="botones">Cerrar sesion</button>
+            </mat-menu>
+            <span>Organizador de Tareas</span>
+            <span class="example-spacer"></span>
+            <!--button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+                <mat-icon>favorite</mat-icon>
+                </button>
+                <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+                <mat-icon>share</mat-icon>
+            <-- Button modal Crear proyecto-->
+            <div class="alinearDerecha">
+                <app-dialog (emitText)="addColumn($event)" question="Añadir Nueva Columna" class="btn">
+                    <button mat-raised-button color="primary" class="btn">
+                        Nueva Columna
+                        <mat-icon>add_circle</mat-icon>
+                    </button>
+                </app-dialog>
+            </div>
+        </div>
+    </mat-toolbar>
+</p>
+<br>
+<div class="centrarTexto">
+    <h1><b>{{nombreProyecto}}</b></h1>
+</div>
+<br>
+<div class="container-fluid">
+    <div cdkDropListGroup class="row">
+        <div class="col-sm-3 col-lg-2 mb-3" *ngFor="let column of boardService.getBoard$() | async">
+
+            <!-- Columna del titulo -->
+            <div class="d-flex justify-content-between align-items-center p-2 shadow-sm column-header">
+                <h2 class="m-0">{{column.title}}</h2>
+                <button mat-icon-button class="icon-delete" (click)="onDeleteColumn(column.id)">
+                    <mat-icon style="font-size: 20px;">delete</mat-icon>
+                </button>
+            </div>
+
+            <!-- Agregar nueva tarea -->
+            <app-dialog (emitText)="onAddCard($event, column.id)"
+                [question]="'Añadir nueva tarea en columna &quot;' + column.title + '&quot; '"
+                [procedencia]="'board'">
+                <button mat-raised-button class="w-100 mb-1 btn-add" ><mat-icon>add_box</mat-icon></button>
+            </app-dialog>
+
+            <!-- Color Panel -->
+            <app-color-panel (emitColor)="onColorChange($event, column.id)"></app-color-panel>
+
+            <div cdkDropList [cdkDropListData]="column.list" class="example-list" (cdkDropListDropped)="drop($event)">
+                <div cdkDrag class="example-box" [ngStyle]="{background: column.color}"
+                    *ngFor="let item of column.list">
+                    <app-board-item [item]="item" (emitText)="onAddComment($event, column.id)"
+                        (emitCardItem)="onChangeLike($event, column.id)"
+                        (emitDeleteCard)="onDeleteCard($event, column.id)">
+                        <div *ngFor="let comment of item.comments">
+                            <app-comment-item [comment]="comment"
+                                (emitComment)="onDeleteComment($event, column.id, item)"></app-comment-item>
+                        </div>
+                    </app-board-item>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

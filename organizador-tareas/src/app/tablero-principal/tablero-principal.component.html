@@ -1,24 +1,26 @@
 <p>
   <mat-toolbar>
-    <button mat-icon-button class="example-icon botones" [matMenuTriggerFor]="menu">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item class="botones">Acerca de</button>
-      <button mat-menu-item class="botones">Cerrar sesion</button>
-    </mat-menu>
-    <span>{{titulo}}</span>
-    <span class="example-spacer"></span>
-    <!--button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-   <mat-icon>share</mat-icon>
-  <-- Button modal Crear proyecto-->
-    <button mat-raised-button class="btn" color="primary" data-bs-toggle="modal" data-bs-target="#modalNuevoProyecto">
-      Nuevo proyecto
-      <mat-icon>add_circle</mat-icon>
-    </button>
+    <div class="containter col-12">
+      <button mat-icon-button class="example-icon botones" [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item class="botones">Acerca de</button>
+        <button mat-menu-item class="botones">Cerrar sesion</button>
+      </mat-menu>
+      <span>{{titulo}}</span>
+      <span class="example-spacer"></span>
+      <!--button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+          <mat-icon>favorite</mat-icon>
+        </button>
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon>share</mat-icon>
+        <-- Button modal Crear proyecto-->
+      <button mat-raised-button class="btn" color="primary" data-bs-toggle="modal" data-bs-target="#modalNuevoProyecto">
+        Nuevo proyecto
+        <mat-icon>add_circle</mat-icon>
+      </button>
+    </div>
   </mat-toolbar>
 </p>
 
@@ -119,7 +121,8 @@
         <br>
         <div class="modal-footer">
           <button mat-button data-bs-dismiss="modal">Cancelar</button>
-          <button mat-raised-button color="primary" (click)="guardarProyecto(crearProyecto.value)">Crear proyecto</button>
+          <button mat-raised-button color="primary" (click)="guardarProyecto(crearProyecto.value)">Crear
+            proyecto</button>
         </div>
       </div>
     </div>

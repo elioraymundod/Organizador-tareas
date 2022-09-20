@@ -61,7 +61,6 @@ export class TableroPrincipalComponent implements OnInit {
         text: 'No se pudo crear el proyecto.'
       })
     })
-    console.log(proyecto)
   }
 
   async obtenerAllTableros(){
@@ -73,7 +72,6 @@ export class TableroPrincipalComponent implements OnInit {
   }
 
   verTablero(complementoRuta: any){
-    console.log(complementoRuta)
     this.router.navigate([`tablero/${complementoRuta}`]);
   }
 }
