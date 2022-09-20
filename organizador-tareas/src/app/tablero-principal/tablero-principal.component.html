@@ -17,7 +17,7 @@
         <mat-icon>share</mat-icon>
         <-- Button modal Crear proyecto-->
       <button mat-raised-button class="btn" color="primary" data-bs-toggle="modal" data-bs-target="#modalNuevoProyecto">
-        Nuevo proyecto
+        Nuevo Tablero
         <mat-icon>add_circle</mat-icon>
       </button>
     </div>
@@ -54,10 +54,10 @@
       </ng-container>
 
 
-      <ng-container matColumnDef="Responsable">
+      <!--ng-container matColumnDef="Responsable">
         <th mat-header-cell *matHeaderCellDef class="headerTable"> Responsable </th>
         <td mat-cell *matCellDef="let element"> </td>
-      </ng-container>
+      </ng-container-->
 
 
       <ng-container matColumnDef="Acciones">
@@ -86,26 +86,28 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title" id="modalNuevoProyectoLabel">Nuevo proyecto</h1>
+        <h1 class="modal-title" id="modalNuevoProyectoLabel">Nuevo tablero</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <!--Formulario-->
         <form [formGroup]="crearProyecto">
           <!--Nombre del proyecto-->
-          <mat-form-field class="example-full-width col-6" appearance="fill">
-            <mat-label>Nombre del proyecto</mat-label>
-            <input matInput formControlName="nombreProyecto">
+          <mat-form-field class="example-full-width col-6"  appearance="fill">
+            <mat-label>Nombre del tablero</mat-label>
+            <input matInput formControlName="nombreProyecto" #nom>
+            <mat-hint align="end">{{nom.value.length}} / 50</mat-hint>
           </mat-form-field>
           <!--Equipo-->
           <mat-form-field class="example-full-width col-6" appearance="fill">
             <mat-label>Abreviatura</mat-label>
-            <input matInput maxlength="3" formControlName="abreviatura">
+            <input matInput maxlength="3" formControlName="abreviatura" #ab>
+            <mat-hint align="end">{{ab.value.length}} / 3</mat-hint>
           </mat-form-field>
           <br>
           <!--Descripcion-->
           <mat-form-field class="col-12">
-            <mat-label>Descripcion</mat-label>
+            <mat-label>Descripción</mat-label>
             <textarea matInput #desc placeholder="" maxlength="1000" required formControlName="descripcion"></textarea>
             <mat-hint align="end">{{desc.value.length}} / 1000</mat-hint>
           </mat-form-field>
@@ -121,8 +123,8 @@
         <br>
         <div class="modal-footer">
           <button mat-button data-bs-dismiss="modal">Cancelar</button>
-          <button mat-raised-button color="primary" (click)="guardarProyecto(crearProyecto.value)">Crear
-            proyecto</button>
+          <button mat-raised-button color="primary" (click)="guardarProyecto(crearProyecto.value)" [disabled]="crearProyecto.invalid">Crear
+            Tablero</button>
         </div>
       </div>
     </div>

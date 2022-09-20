@@ -9,16 +9,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MaterialExampleModule } from 'src/material.module';
-import * as $ from "jquery";
 import { TablerosComponent } from './tableros/tableros.component';
 import { ProyectosServiceService } from './Servicios/proyectos-service.service';
-import { BoardComponent } from './board/board/board.component';
-import { BoardItemComponent } from './board/board-item/board-item.component';
-import { ColorPanelComponent } from './board/color-panel/color-panel.component';
-import { CommentItemComponent } from './board/comment-item/comment-item.component';
-import { DialogComponent } from './components/dialog/dialog/dialog.component';
-import { DialogBodyComponent } from './components/dialog/dialog-body/dialog-body.component';
 import { BoardModule } from './board/board.module';
+//import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -35,7 +29,8 @@ import { BoardModule } from './board/board.module';
     MatNativeDateModule,
     MaterialExampleModule,
     ReactiveFormsModule,
-    BoardModule
+    BoardModule,
+    //NgxSpinnerModule,
   ],
   providers: [
     ProyectosServiceService

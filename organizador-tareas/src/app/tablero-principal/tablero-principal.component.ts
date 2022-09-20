@@ -14,7 +14,7 @@ declare let $: any;
 export class TableroPrincipalComponent implements OnInit {
 
   dataSource = new MatTableDataSource();
-  displayedColumns: string[] = ['Nombre', 'Abreviatura', 'Descripcion', 'Responsable', 'Acciones']
+  displayedColumns: string[] = ['Nombre', 'Abreviatura', 'Descripcion', 'Acciones']
   titulo: String;
   crearProyecto: FormGroup
 
@@ -38,7 +38,6 @@ export class TableroPrincipalComponent implements OnInit {
 
   guardarProyecto(datos: any){
     const proyecto = {
-      ID: 4,
       NOMBRE: this.crearProyecto.get('nombreProyecto')?.value,
       ABREVIATURA: this.crearProyecto.get('abreviatura')?.value,
       DESCRIPCION: datos.descripcion,
@@ -52,13 +51,13 @@ export class TableroPrincipalComponent implements OnInit {
       Swal.fire({
         icon: 'success',
         title: 'Guardado',
-        text: 'El proyecto se creó correctamente.'
+        text: 'El tablero se creó correctamente.'
       })
     }, err => {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'No se pudo crear el proyecto.'
+        text: 'Ha ocurrido un error, por favor intente más tarde.'
       })
     })
   }
