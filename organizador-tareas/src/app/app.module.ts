@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,7 +12,7 @@ import { MaterialExampleModule } from 'src/material.module';
 import { TablerosComponent } from './tableros/tableros.component';
 import { ProyectosServiceService } from './Servicios/proyectos-service.service';
 import { BoardModule } from './board/board.module';
-//import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -30,11 +30,14 @@ import { BoardModule } from './board/board.module';
     MaterialExampleModule,
     ReactiveFormsModule,
     BoardModule,
-    //NgxSpinnerModule,
+    NgxSpinnerModule,
   ],
   providers: [
     ProyectosServiceService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

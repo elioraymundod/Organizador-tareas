@@ -29,7 +29,7 @@
   <form class="example-form">
     <mat-form-field class="example-full-width col-3">
       <mat-label>Realizar busqueda</mat-label>
-      <input matInput>
+      <input matInput (keyup)="filtroTableros($event)">
     </mat-form-field>
   </form>
 
@@ -122,8 +122,8 @@
           </div-->
         <br>
         <div class="modal-footer">
-          <button mat-button data-bs-dismiss="modal">Cancelar</button>
-          <button mat-raised-button color="primary" (click)="guardarProyecto(crearProyecto.value)" [disabled]="crearProyecto.invalid">Crear
+          <button mat-button data-bs-dismiss="modal" (click)="limpiarForms()">Cancelar</button>
+          <button mat-raised-button color="primary" (click)="guardarProyecto(crearProyecto.value)" [disabled]="crearProyecto.invalid" data-bs-dismiss="modal">Crear
             Tablero</button>
         </div>
       </div>
