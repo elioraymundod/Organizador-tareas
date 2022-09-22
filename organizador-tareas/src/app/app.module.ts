@@ -12,6 +12,8 @@ import { MaterialExampleModule } from 'src/material.module';
 import { TablerosComponent } from './tableros/tableros.component';
 import { ProyectosServiceService } from './Servicios/proyectos-service.service';
 import { BoardModule } from './board/board.module';
+import { LoginComponent } from './login/login.component';
+
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ColumnasService } from './Servicios/columnas.service';
 
@@ -20,6 +22,7 @@ import { ColumnasService } from './Servicios/columnas.service';
     AppComponent,
     TableroPrincipalComponent,
     TablerosComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
