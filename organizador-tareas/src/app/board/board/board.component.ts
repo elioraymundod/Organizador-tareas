@@ -5,6 +5,7 @@ import { ProyectosServiceService } from 'src/app/Servicios/proyectos-service.ser
 import { ActivatedRoute, Router } from '@angular/router';
 import { BoardDetalle } from 'src/app/clases/boardDetalle.interface';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ColumnasService } from 'src/app/Servicios/columnas.service';
 
 @Component({
   selector: 'app-board',
@@ -15,42 +16,69 @@ export class BoardComponent implements OnInit {
 
   tablero: any = [];
   nombreProyecto: String;
+  public codigoTablero: string | null;
+  
 
   constructor(
     public boardService: BoardService,
     private tablerosService: ProyectosServiceService,
     private route: ActivatedRoute,
     private router: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private columnasService: ColumnasService
   ) {
     this.nombreProyecto = '';
+    this.codigoTablero = '';
   }
 
   async ngOnInit() {
     //this.spinner.show();
     this.route.paramMap.subscribe(async params => {
       const codigoTablero = params.get('codigo_tablero');
+      this.codigoTablero = codigoTablero;
       this.tablero = await this.getBoardData(codigoTablero);
     });
-
+    this.columnasService.codigoTablero = this.codigoTablero;
+    //console.log('el metodo es  ', this.boardService.getColumnById())
+    /*
+    this.boardService.initBoard = {
+      id: 1,
+      title: 'Tareas por hacer',
+      color: '#009886',
+      list: [
+          {
+              id: 1,
+              text: 'Ejemplo de elemento de tarjeta',
+              like: 1,
+              comments: [
+                  {
+                      id: 1,
+                      text: 'Comentario'
+                  }
+              ]
+          },
+      ]
+  }
+    */
   }
 
   onColorChange(color: string, columnId: number) {
     this.boardService.changeColumnColor(color, columnId)
+    this.boardService.saveChanges(this.codigoTablero);
   }
 
   onAddCard(text: string, columnId: number) {
     if (text) {
-      this.boardService.addCard(text, columnId)
+      this.boardService.addCard(text, columnId, this.codigoTablero)
     }
   }
 
   onDeleteColumn(columnId: number) {
-    this.boardService.deleteColumn(columnId)
+    this.boardService.deleteColumn(columnId, this.codigoTablero)
   }
 
   onDeleteCard(cardId: number, columnId: number) {
-    this.boardService.deleteCard(cardId, columnId)
+    this.boardService.deleteCard(cardId, columnId, this.codigoTablero)
   }
 
   onChangeLike(event: { card: any, increase: boolean }, columnId: number) {
@@ -75,12 +103,13 @@ export class BoardComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
+    this.boardService.saveChanges(this.codigoTablero);
   }
 
   //Agregar nueva columna
   addColumn(event: string) {
     if (event) {
-      this.boardService.addColumn(event)
+      this.boardService.addColumn(event, this.codigoTablero)
     }
   }
 

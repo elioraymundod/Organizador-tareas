@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
+import { BoardService } from '../Servicios/board.service';
 import { ProyectosServiceService } from '../Servicios/proyectos-service.service';
 declare let $: any;
 
@@ -25,9 +26,9 @@ export class TableroPrincipalComponent implements OnInit{
 
   constructor(private _formBuilder: FormBuilder,
               private proyectosService: ProyectosServiceService,
-              private activatedRoute: ActivatedRoute, 
               private router: Router,
-              private spinner: NgxSpinnerService) {
+              private spinner: NgxSpinnerService,
+              private boardService: BoardService) {
     this.titulo = 'Organizador de Tareas';
     this.crearProyecto = this._formBuilder.group({
       nombreProyecto: ['', [Validators.required]],
@@ -37,9 +38,10 @@ export class TableroPrincipalComponent implements OnInit{
   }
 
   async ngOnInit() {
+    window.localStorage.clear();
     this.spinner.show();
     //Obtener los tableros y mostrarlos en la tabla
-    await this.obtenerAllTableros();    
+    await this.obtenerAllTableros();  
   }
 
   ngAfterViewInit() {
@@ -92,6 +94,7 @@ export class TableroPrincipalComponent implements OnInit{
 
   // Visualizar las tareas de un tablero
   verTablero(complementoRuta: any){
+    this.boardService.getColumnById(complementoRuta);
     this.router.navigate([`tablero/${complementoRuta}`]);
   }
 

@@ -13,7 +13,6 @@ export class DialogComponent implements OnInit {
   @Input() procedencia: string | undefined;
 
   constructor(public dialog: MatDialog) { 
-    console.log('la procedencia es ', this.procedencia)
   }
 
   ngOnInit(): void {

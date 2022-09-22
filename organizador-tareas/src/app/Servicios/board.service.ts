@@ -1,18 +1,38 @@
-import { Injectable } from '@angular/core'
+import { Injectable, OnInit } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { BehaviorSubject } from 'rxjs';
+import Swal from 'sweetalert2';
+import { BoardComponent } from '../board/board/board.component';
+import { Columnas } from '../clases/Columnas.class';
 import { Card, Column, Comment } from '../models/column.model';
+import { ColumnasService } from './columnas.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class BoardService {
-    private initBoard = [
+    columnasJson: string;
+    columnasJsonParse: string;
+    codigoTablero: string | null;
+
+    constructor(private columnasService: ColumnasService,
+        private spinner: NgxSpinnerService,
+        private route: ActivatedRoute,
+        private router: Router) {
+        this.columnasJson = '';
+        this.columnasJsonParse = '';
+        this.codigoTablero = '';
+    }
+
+    public initBoard: Column[] = this.getColumnById(0);
+    /*[
         {
             id: 1,
             title: 'Tareas por hacer',
             color: '#009886',
             list: [
-                /*{
+                {
                     id: 1,
                     text: 'Ejemplo de elemento de tarjeta',
                     like: 1,
@@ -22,13 +42,14 @@ export class BoardService {
                             text: 'Comentario'
                         }
                     ]
-                },*/
+                },
             ]
         },
-    ]
+        
+    ]*/
 
-    private board: Column[] = this.initBoard
-    private board$ = new BehaviorSubject<Column[]>(this.initBoard)
+    public board: Column[] = this.initBoard
+    public board$ = new BehaviorSubject<Column[]>(this.initBoard)
 
     getBoard$() {
         return this.board$.asObservable()
@@ -44,7 +65,7 @@ export class BoardService {
         this.board$.next([...this.board]);
     }
 
-    addColumn(title: string) {
+    async addColumn(title: string, idTablero: any) {
         const newColumn: Column = {
             id: Date.now(),
             title: title,
@@ -53,10 +74,12 @@ export class BoardService {
         };
 
         this.board = [...this.board, newColumn];
+        this.saveChanges(idTablero);
         this.board$.next([...this.board]);
     }
 
-    addCard(text: string, columnId: number) {
+    addCard(text: string, columnId: number, tableroId: string | null) {
+        this.spinner.show();
         const newCard: Card = {
             id: Date.now(),
             text,
@@ -71,22 +94,26 @@ export class BoardService {
             return column;
         });
 
+        // Guardar los cambios realizados
+        this.saveChanges(tableroId);
+        
         this.board$.next([...this.board]);
     }
 
-    deleteColumn(columnId: number) {
+    deleteColumn(columnId: number, tableroId: string | null) {
         this.board = this.board.filter((column: Column) => column.id !== columnId);
+        this.saveChanges(tableroId);
         this.board$.next([...this.board]);
     }
 
-    deleteCard(cardId: number, columnId: number) {
+    deleteCard(cardId: number, columnId: number, tableroId: string | null) {
         this.board = this.board.map((column: Column) => {
             if (column.id === columnId) {
                 column.list = column.list.filter((card: Card) => card.id !== cardId);
             }
             return column;
         });
-
+        this.saveChanges(tableroId);
         this.board$.next([...this.board]);
     }
 
@@ -154,5 +181,83 @@ export class BoardService {
             return column
         })
         this.board$.next([...this.board])
+    }
+
+    getColumnById(codigoTablero: any): Column[] {
+        this.spinner.show();
+        // Obtener el codigo del tablero en base a la ruta
+        if (codigoTablero == 0) {
+            this.router.navigate([`tablero-principal`]);
+        } else {
+            this.codigoTablero = this.columnasService.codigoTablero;
+            let columnas: String;
+            let returnColumnas: Column[];
+            console.log()
+            //Obtener las columnas segun el codigo del tablero
+            this.columnasService.getColumnaByCodigo(codigoTablero).subscribe(res => {
+                this.spinner.hide();
+                if (res.length == 0) {
+                    Swal.fire(
+                        'Tablero vacío',
+                        'Aún no existen listas de tareas creadas para este tablero, intenta crear una nueva lista presionando el boton "Nueva Columna"',
+                        'info'
+                      )
+                    returnColumnas = [];
+                    this.board = returnColumnas;
+                    this.board$ = new BehaviorSubject<Column[]>(returnColumnas)
+                } else {
+                    columnas = String(res[0].COLUMNAS)
+                    returnColumnas = JSON.parse(String(columnas));
+                    this.board = returnColumnas;
+                    this.board$ = new BehaviorSubject<Column[]>(returnColumnas)
+                }
+                return returnColumnas;
+            })
+        }
+        return []
+    }
+
+    async saveColumn(codigoTablero: any, saveColumns: any) {
+        this.spinner.show();
+        await this.columnasService.getColumnaByCodigo(codigoTablero).subscribe(res => {
+            this.spinner.hide();
+            if (res.length == 0) {
+                this.columnasService.crearColumna(saveColumns).subscribe(res => {
+                    console.log(saveColumns)
+                    this.spinner.hide();
+                }, err => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Ha ocurrido un error, por favor intente más tarde.'
+                    })
+                })
+            } else {
+                this.columnasService.updateColumna(saveColumns).subscribe(res => {
+                    this.spinner.hide();
+                }, err => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Ha ocurrido un error, por favor intente más tarde.'
+                    })
+                })
+                this.spinner.hide();
+            }
+        }, err => {
+            this.spinner.hide();
+        });
+    }
+
+    saveChanges(id: string | null) {
+        // Guardar los cambios realizados
+        this.columnasJson = JSON.stringify(this.board);
+        const saveColumns = {
+            ID: id,
+            TABLERO: id,
+            COLUMNAS: this.columnasJson
+        }
+
+        this.saveColumn(id, saveColumns);
     }
 }

@@ -34,6 +34,6 @@ import { MaterialExampleModule } from 'src/material.module';
   ],
   exports: [
     BoardComponent
-  ]
+  ],
 })
 export class BoardModule { }
