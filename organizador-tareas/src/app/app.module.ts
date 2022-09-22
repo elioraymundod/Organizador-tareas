@@ -19,12 +19,15 @@ import { CommentItemComponent } from './board/comment-item/comment-item.componen
 import { DialogComponent } from './components/dialog/dialog/dialog.component';
 import { DialogBodyComponent } from './components/dialog/dialog-body/dialog-body.component';
 import { BoardModule } from './board/board.module';
+import { LoginComponent } from './login/login.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     TableroPrincipalComponent,
     TablerosComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
