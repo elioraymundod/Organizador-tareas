@@ -96,7 +96,7 @@ export class BoardService {
 
         // Guardar los cambios realizados
         this.saveChanges(tableroId);
-        
+
         this.board$.next([...this.board]);
     }
 
@@ -185,6 +185,10 @@ export class BoardService {
 
     getColumnById(codigoTablero: any): Column[] {
         this.spinner.show();
+        //Limpiar board
+        this.board = [];
+        this.board$ = new BehaviorSubject<Column[]>([])
+        setTimeout(() => {
         // Obtener el codigo del tablero en base a la ruta
         if (codigoTablero == 0) {
             this.router.navigate([`tablero-principal`]);
@@ -201,7 +205,7 @@ export class BoardService {
                         'Tablero vacío',
                         'Aún no existen listas de tareas creadas para este tablero, intenta crear una nueva lista presionando el boton "Nueva Columna"',
                         'info'
-                      )
+                    )
                     returnColumnas = [];
                     this.board = returnColumnas;
                     this.board$ = new BehaviorSubject<Column[]>(returnColumnas)
@@ -214,6 +218,7 @@ export class BoardService {
                 return returnColumnas;
             })
         }
+        }, 1000);
         return []
     }
 

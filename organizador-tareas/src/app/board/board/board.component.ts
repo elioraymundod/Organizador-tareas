@@ -33,34 +33,13 @@ export class BoardComponent implements OnInit {
   }
 
   async ngOnInit() {
-    //this.spinner.show();
+    this.spinner.show();
     this.route.paramMap.subscribe(async params => {
       const codigoTablero = params.get('codigo_tablero');
       this.codigoTablero = codigoTablero;
       this.tablero = await this.getBoardData(codigoTablero);
     });
     this.columnasService.codigoTablero = this.codigoTablero;
-    //console.log('el metodo es  ', this.boardService.getColumnById())
-    /*
-    this.boardService.initBoard = {
-      id: 1,
-      title: 'Tareas por hacer',
-      color: '#009886',
-      list: [
-          {
-              id: 1,
-              text: 'Ejemplo de elemento de tarjeta',
-              like: 1,
-              comments: [
-                  {
-                      id: 1,
-                      text: 'Comentario'
-                  }
-              ]
-          },
-      ]
-  }
-    */
   }
 
   onColorChange(color: string, columnId: number) {
@@ -92,7 +71,6 @@ export class BoardComponent implements OnInit {
         )
       }
     })
-    
   }
 
   onDeleteCard(cardId: number, columnId: number) {
