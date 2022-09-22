@@ -4,6 +4,7 @@ import { BoardService } from 'src/app/Servicios/board.service';
 import { ProyectosServiceService } from 'src/app/Servicios/proyectos-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BoardDetalle } from 'src/app/clases/boardDetalle.interface';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-board',
@@ -19,12 +20,14 @@ export class BoardComponent implements OnInit {
     public boardService: BoardService,
     private tablerosService: ProyectosServiceService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) {
     this.nombreProyecto = '';
   }
 
   async ngOnInit() {
+    //this.spinner.show();
     this.route.paramMap.subscribe(async params => {
       const codigoTablero = params.get('codigo_tablero');
       this.tablero = await this.getBoardData(codigoTablero);

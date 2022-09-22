@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,18 +9,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MaterialExampleModule } from 'src/material.module';
-import * as $ from "jquery";
 import { TablerosComponent } from './tableros/tableros.component';
 import { ProyectosServiceService } from './Servicios/proyectos-service.service';
-import { BoardComponent } from './board/board/board.component';
-import { BoardItemComponent } from './board/board-item/board-item.component';
-import { ColorPanelComponent } from './board/color-panel/color-panel.component';
-import { CommentItemComponent } from './board/comment-item/comment-item.component';
-import { DialogComponent } from './components/dialog/dialog/dialog.component';
-import { DialogBodyComponent } from './components/dialog/dialog-body/dialog-body.component';
 import { BoardModule } from './board/board.module';
+<<<<<<< HEAD
 import { LoginComponent } from './login/login.component';
 
+=======
+import { NgxSpinnerModule } from 'ngx-spinner';
+>>>>>>> 20666b131ac5aa01827ed032817b712e006b73de
 
 @NgModule({
   declarations: [
@@ -38,11 +35,15 @@ import { LoginComponent } from './login/login.component';
     MatNativeDateModule,
     MaterialExampleModule,
     ReactiveFormsModule,
-    BoardModule
+    BoardModule,
+    NgxSpinnerModule,
   ],
   providers: [
     ProyectosServiceService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }
