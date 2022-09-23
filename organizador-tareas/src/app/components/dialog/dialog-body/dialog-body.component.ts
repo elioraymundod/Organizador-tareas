@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class DialogBodyComponent implements OnInit {
 
-  tareasService: any;
+ /* tareasService: any;
   crearTarea: FormGroup
  
   
@@ -68,9 +68,9 @@ export class DialogBodyComponent implements OnInit {
 
   limpiarForms(): void{
     this.crearTarea.reset();
-  }
+  }*/
   
-/** 
+
   constructor(
     public dialogRef: MatDialogRef<DialogBodyComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -82,6 +82,6 @@ export class DialogBodyComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  **/
+  
 
 }

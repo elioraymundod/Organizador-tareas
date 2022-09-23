@@ -1,4 +1,4 @@
-<!--
+
     <div mat-dialog-content>
     <h3>{{data.question}}</h3>
     <mat-form-field class="w-100">
@@ -7,28 +7,32 @@
     </mat-form-field>
 </div>
 
+<!--
 <div mat-dialog-content>
     <mat-form-field class="w-100">
         <mat-label>Añadir descripción</mat-label>
         <input matInput [(ngModel)]="data.text">
     </mat-form-field>
-</div>
+</div>-->
 
 <div mat-dialog-actions>
     <button mat-raised-button [mat-dialog-close]="data.text" cdkFocusInitial color="primary">Guardar</button>
     <button mat-button (click)="onNoClick()">Cancelar</button>
 </div>
--->
-<div mat-dialog-content>
-        <!--Formulario-->
+
+
+
+
+<!--<div mat-dialog-content>
+        
         <form [formGroup]="crearTarea">
-          <!--Nombre-->
+      
           <mat-form-field class="example-full-width col-6"  appearance="fill">
             <mat-label>Nombre de la tarea</mat-label>
             <input matInput formControlName="nombreTarea" #nom>
             <mat-hint align="end">{{nom.value.length}} / 50</mat-hint>
           </mat-form-field>
-          <!--Descripcion-->
+         
           <mat-form-field class="col-12">
             <mat-label>Descripción</mat-label>
             <textarea matInput #desc placeholder="" maxlength="1000" required formControlName="descripcion"></textarea>
@@ -41,4 +45,4 @@
             <button mat-raised-button color="primary" (click)="guardarTarea(crearTarea.value)" [disabled]="crearTarea.invalid" data-bs-dismiss="modal">Crear
               Tablero</button>
           </div>
-        </div>
+        </div>-->
