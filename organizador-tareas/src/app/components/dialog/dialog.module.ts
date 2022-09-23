@@ -8,11 +8,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DialogTaskComponent } from './dialog-task/dialog-task.component';
 
 @NgModule({
   declarations: [
     DialogComponent,
-    DialogBodyComponent
+    DialogBodyComponent,
+    DialogTaskComponent
   ],
   imports: [
     CommonModule,

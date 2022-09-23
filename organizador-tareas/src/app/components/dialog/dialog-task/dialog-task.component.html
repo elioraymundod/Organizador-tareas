@@ -1,0 +1,23 @@
+<div mat-dialog-content>
+    <h3>{{data.question}}</h3>
+    <div class="row">
+        <mat-form-field class="col-6">
+            <mat-label>Añadir Titulo task</mat-label>
+            <input matInput [(ngModel)]="data.text">
+        </mat-form-field>
+        <mat-form-field class="col-6">
+            <mat-label>Añadir Titulo task</mat-label>
+            <input matInput [(ngModel)]="data.text">
+        </mat-form-field>
+        <mat-form-field class="col-6">
+            <mat-label>Añadir Titulo task</mat-label>
+            <input matInput [(ngModel)]="data.text">
+        </mat-form-field>
+    </div>
+</div>
+
+
+<div mat-dialog-actions>
+    <button mat-raised-button [mat-dialog-close]="data.text" cdkFocusInitial color="primary">Guardar</button>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+</div>

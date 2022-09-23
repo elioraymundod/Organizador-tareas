@@ -17,7 +17,7 @@
                 <mat-icon>share</mat-icon>
             <-- Button modal Crear proyecto-->
             <div class="alinearDerecha">
-                <app-dialog (emitText)="addColumn($event)" question="Añadir Nueva Lista de Tareas" class="btn">
+                <app-dialog (emitText)="addColumn($event)" [procedencia]="'columna'" question="Añadir Nueva Lista de Tareas" class="btn">
                     <button mat-raised-button color="primary" class="btn">
                         Nueva Lista de Tareas
                         <mat-icon>add_circle</mat-icon>
@@ -47,7 +47,7 @@
             <!-- Agregar nueva tarea -->
             <app-dialog (emitText)="onAddCard($event, column.id)"
                 [question]="'Agregar nueva tarea en columna &quot;' + column.title + '&quot; '"
-                [procedencia]="'board'">
+                [procedencia]="'task'">
                 <button mat-raised-button class="w-100 mb-1 btn-add" ><mat-icon>add_box</mat-icon></button>
             </app-dialog>
 
