@@ -5,6 +5,8 @@ import { ProyectosServiceService } from 'src/app/Servicios/proyectos-service.ser
 import { ActivatedRoute, Router } from '@angular/router';
 import { BoardDetalle } from 'src/app/clases/boardDetalle.interface';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ColumnasService } from 'src/app/Servicios/columnas.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-board',
@@ -15,42 +17,64 @@ export class BoardComponent implements OnInit {
 
   tablero: any = [];
   nombreProyecto: String;
+  public codigoTablero: string | null;
+
 
   constructor(
     public boardService: BoardService,
     private tablerosService: ProyectosServiceService,
     private route: ActivatedRoute,
     private router: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private columnasService: ColumnasService
   ) {
     this.nombreProyecto = '';
+    this.codigoTablero = '';
   }
 
   async ngOnInit() {
-    //this.spinner.show();
+    this.spinner.show();
     this.route.paramMap.subscribe(async params => {
       const codigoTablero = params.get('codigo_tablero');
+      this.codigoTablero = codigoTablero;
       this.tablero = await this.getBoardData(codigoTablero);
     });
-
+    this.columnasService.codigoTablero = this.codigoTablero;
   }
 
   onColorChange(color: string, columnId: number) {
     this.boardService.changeColumnColor(color, columnId)
+    this.boardService.saveChanges(this.codigoTablero);
   }
 
   onAddCard(text: string, columnId: number) {
     if (text) {
-      this.boardService.addCard(text, columnId)
+      this.boardService.addCard(text, columnId, this.codigoTablero)
     }
   }
 
   onDeleteColumn(columnId: number) {
-    this.boardService.deleteColumn(columnId)
+    Swal.fire({
+      title: '¿Está seguro que desea eliminar esta lista con todas sus tareas?',
+      showDenyButton: true,
+      showConfirmButton: false,
+      showCancelButton: true,
+      denyButtonText: `Eliminar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isDenied) {
+        this.boardService.deleteColumn(columnId, this.codigoTablero);
+        Swal.fire({
+          title: 'Lista de Tareas eliminada con éxito',
+          icon: 'success'
+        }
+        )
+      }
+    })
   }
 
   onDeleteCard(cardId: number, columnId: number) {
-    this.boardService.deleteCard(cardId, columnId)
+    this.boardService.deleteCard(cardId, columnId, this.codigoTablero)
   }
 
   onChangeLike(event: { card: any, increase: boolean }, columnId: number) {
@@ -75,12 +99,13 @@ export class BoardComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
+    this.boardService.saveChanges(this.codigoTablero);
   }
 
   //Agregar nueva columna
   addColumn(event: string) {
     if (event) {
-      this.boardService.addColumn(event)
+      this.boardService.addColumn(event, this.codigoTablero)
     }
   }
 

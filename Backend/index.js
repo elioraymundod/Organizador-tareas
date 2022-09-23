@@ -22,6 +22,7 @@ app.use(cors());
 app.use(morgan('dev'));
 //Router
 app.use(require('./Routers/proyectos'));
+app.use(require('./Routers/columnas'));
 
 app.listen(app.get('port'),()=>{
     console.log(`Server rum on port ${app.get('port')}`)
