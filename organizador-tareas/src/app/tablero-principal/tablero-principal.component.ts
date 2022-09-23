@@ -54,7 +54,7 @@ export class TableroPrincipalComponent implements OnInit{
       DESCRIPCION: datos.descripcion,
       FECHA_CREACION: null,
       USUARIO_CREACION: 'elio',
-      FECHA_MODIFICACION: null,
+      FECHA_MODIFICACION: '',
       USUARIO_MODIFICACION: ''
     }
 

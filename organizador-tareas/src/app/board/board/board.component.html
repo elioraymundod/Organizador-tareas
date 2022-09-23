@@ -46,7 +46,7 @@
 
             <!-- Agregar nueva tarea -->
             <app-dialog (emitText)="onAddCard($event, column.id)"
-                [question]="'Añadir nueva tarea en columna &quot;' + column.title + '&quot; '"
+                [question]="'Agregar nueva tarea en columna &quot;' + column.title + '&quot; '"
                 [procedencia]="'board'">
                 <button mat-raised-button class="w-100 mb-1 btn-add" ><mat-icon>add_box</mat-icon></button>
             </app-dialog>
