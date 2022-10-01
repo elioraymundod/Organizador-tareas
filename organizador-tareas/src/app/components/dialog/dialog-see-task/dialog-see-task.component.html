@@ -2,7 +2,11 @@
     <h3>{{data.question}}</h3>
     <div class="row">
         <mat-form-field class="col-6">
-            <mat-label>Añadir Titulo task</mat-label>
+            <mat-label>Titulo tarea</mat-label>
+            <input matInput [(ngModel)]="data.text">
+        </mat-form-field>
+        <mat-form-field class="col-6">
+            <mat-label>Descripcion tarea</mat-label>
             <input matInput [(ngModel)]="data.text">
         </mat-form-field>
     </div>

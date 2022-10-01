@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogTaskComponent } from './dialog-task/dialog-task.component';
 import { DialogSeeTaskComponent } from './dialog-see-task/dialog-see-task.component';
+import { MaterialExampleModule } from 'src/material.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DialogSeeTaskComponent } from './dialog-see-task/dialog-see-task.compon
     MatButtonModule,
     MatInputModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialExampleModule
   ],
   exports: [
     DialogComponent
