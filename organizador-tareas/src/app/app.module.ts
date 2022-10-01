@@ -17,6 +17,7 @@ import { LoginComponent } from './login/login.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ColumnasService } from './Servicios/columnas.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,7 @@ import { ColumnasService } from './Servicios/columnas.service';
     TablerosComponent,
     LoginComponent,
   ],
-  imports: [
+  imports: [ 
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

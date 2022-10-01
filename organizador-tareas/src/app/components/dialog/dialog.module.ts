@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogTaskComponent } from './dialog-task/dialog-task.component';
+import { MaterialExampleModule } from 'src/material.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DialogTaskComponent } from './dialog-task/dialog-task.component';
     MatButtonModule,
     MatInputModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialExampleModule
   ],
   exports: [
     DialogComponent
