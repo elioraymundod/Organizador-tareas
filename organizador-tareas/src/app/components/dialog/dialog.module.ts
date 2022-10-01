@@ -9,12 +9,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogTaskComponent } from './dialog-task/dialog-task.component';
+import { DialogSeeTaskComponent } from './dialog-see-task/dialog-see-task.component';
 
 @NgModule({
   declarations: [
     DialogComponent,
     DialogBodyComponent,
-    DialogTaskComponent
+    DialogTaskComponent,
+    DialogSeeTaskComponent
   ],
   imports: [
     CommonModule,
