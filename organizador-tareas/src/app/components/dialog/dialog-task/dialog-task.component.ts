@@ -16,7 +16,7 @@ export interface DialogData {
   styleUrls: ['./dialog-task.component.css']
 })
 export class DialogTaskComponent implements OnInit {
-  descripcion!: string;/*para ejemplo de descripcion de tarea*/
+  descripcion!: string;/*descripcion de tarea*/
 
   usuario: string[] = ['Melani', 'usuario2', 'usuario3']; /*para asignar usuario*/
   /*position = new FormControl(this.usuario[0]); /*para asignar usuario*/
