@@ -8,42 +8,41 @@
 
         <mat-form-field class="col-8">
             <mat-label>Añadir Descripción</mat-label>
-            <input matInput [(ngModel)]="descripcion">
+            <input matInput [(ngModel)]="data.descripcion">
         </mat-form-field>
     </div>
 </div>
 <br>
 
-<!--PRUEBA CALENDARIO-->
+<!--PRUEBA CALENDARIO formControlName="start" formControlName="end" -->
 <div class="row">
     <mat-form-field appearance="fill" class="col-5">
         <mat-label>Ingresar fecha</mat-label>
         <mat-date-range-input [rangePicker]="picker">
-          <input matStartDate formControlName="start" placeholder="Fecha de inicio">
-          <input matEndDate formControlName="end" placeholder="Fecha fin">
+            <input matStartDate placeholder="Fecha de inicio" [(ngModel)]="data.fechaInicial">
+            <input matEndDate placeholder="Fecha fin" [(ngModel)]="data.fechaFin">
         </mat-date-range-input>
         <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
     </mat-form-field>
-<!---->
 
-<!--ASIGNAR USUARIO-->
-<mat-form-field appearance="fill"class="col-5">
-    <mat-label>Asignar usuario</mat-label>
-    <mat-select>
-        <mat-option *ngFor="let usuario of usuario" value="usuario">{{usuario}}</mat-option>
-    </mat-select>
-</mat-form-field>
+    <!--ASIGNAR USUARIO-->
+    <mat-form-field appearance="fill" class="col-5">
+        <mat-label>Asignar usuario</mat-label>
+        <mat-select [(ngModel)]="data.usuarioAsignado">
+            <mat-option *ngFor="let usuario of usuario" value="{{usuario}}">{{usuario}}</mat-option>
+        </mat-select>
+    </mat-form-field>
 
-<!--prioridad-->
-<mat-form-field appearance="fill"class="col-2">
-    <mat-label>Prioridad</mat-label>
-    <mat-select>
-        <mat-option *ngFor="let prioridad of prioridad" value="prioridad">{{prioridad}}</mat-option> 
-    </mat-select>
-</mat-form-field>
-<!--
+    <!--prioridad-->
+    <mat-form-field appearance="fill" class="col-2">
+        <mat-label>Prioridad</mat-label>
+        <mat-select [(ngModel)]="data.prioridad">
+            <mat-option *ngFor="let prioridad of prioridad" value="{{prioridad}}">{{prioridad}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <!--
     <mat-form-field appearance="fill" class="col-4">
     <mat-label>Tooltip position</mat-label>
     <mat-select [formControl]="position">
@@ -54,8 +53,8 @@
   </mat-form-field>
 -->
 
-<br>
-<div mat-dialog-actions>
-    <button mat-raised-button [mat-dialog-close]="data.text" cdkFocusInitial color="primary">Guardar</button>
-    <button mat-button (click)="onNoClick()">Cancelar</button>
-</div>
+    <br>
+    <div mat-dialog-actions>
+        <button mat-raised-button [mat-dialog-close]="[data.text, data.descripcion, data.fechaInicial, data.fechaFin, data.usuarioAsignado, data.prioridad]" cdkFocusInitial color="primary">Guardar</button>
+        <button mat-button (click)="onNoClick()">Cancelar</button>
+    </div>

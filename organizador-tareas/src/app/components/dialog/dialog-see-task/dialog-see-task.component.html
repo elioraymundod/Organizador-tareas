@@ -1,19 +1,157 @@
 <div mat-dialog-content>
-    <h3>{{data.question}}</h3>
+    <mat-card-title [ngStyle]="{color: data.color}">{{data.question}}</mat-card-title><br>
     <div class="row">
-        <mat-form-field class="col-6">
-            <mat-label>Titulo tarea</mat-label>
-            <input matInput [(ngModel)]="data.text">
-        </mat-form-field>
-        <mat-form-field class="col-6">
-            <mat-label>Descripcion tarea</mat-label>
-            <input matInput [(ngModel)]="data.text">
-        </mat-form-field>
+        <div class="col-9">
+            <div class="row mt-2">
+                <div class="col-6">
+                    <mat-card class="parent">
+                        <div class="child" [ngStyle]="{background: data.color} ">
+                            <mat-icon>person_pin</mat-icon>
+                        </div>
+                        <h3 class="font-weight-bold m-2" [ngStyle]="{color: data.color} ">
+                            Informador
+                        </h3>
+                        <mat-form-field class="col-12">
+                            <mat-select>
+                                <mat-option *ngFor="let usuario of usuarios" [value]="usuario.value">
+                                    {{usuario.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </mat-card><br><br>
+                </div>
+                <div class="col-6">
+                    <mat-card class="parent">
+                        <div class="child" [ngStyle]="{background: data.color} ">
+                            <mat-icon>person_pin</mat-icon>
+                        </div>
+                        <h3 class="font-weight-bold m-2" [ngStyle]="{color: data.color} ">
+                            Usuario asignado
+                        </h3>
+                        <mat-form-field class="col-12">
+                            <mat-select>
+                                <mat-option *ngFor="let usuario of usuarios" [value]="usuario.value">
+                                    {{usuario.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </mat-card><br><br>
+                </div>
+                <div class="col-6">
+                    <mat-card class="parent">
+                        <div class="child" [ngStyle]="{background: data.color} ">
+                            <mat-icon>warning</mat-icon>
+                        </div>
+                        <h3 class="font-weight-bold m-2" [ngStyle]="{color: data.color} ">
+                            Prioridad
+                        </h3>
+                        <mat-form-field class="col-12">
+                            <mat-select>
+                                <mat-option *ngFor="let prioridad of priridades" [value]="prioridad.value">
+                                    {{prioridad.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </mat-card><br><br>
+                </div>
+                <div class="col-6">
+                    <mat-card class="parent">
+                        <div class="child" [ngStyle]="{background: data.color} ">
+                            <mat-icon>timelapse</mat-icon>
+                        </div>
+                        <h3 class="font-weight-bold m-2" [ngStyle]="{color: data.color} ">
+                            Esfuerzo
+                        </h3>
+                        <mat-form-field class="col-12">
+                            <mat-select>
+                                <mat-option *ngFor="let prioridad of priridades" [value]="prioridad.value">
+                                    {{prioridad.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </mat-card><br><br>
+                </div>
+                <div class="col-6">
+                    <mat-card class="parent">
+                        <div class="child" [ngStyle]="{background: data.color} ">
+                            <mat-icon>date_range</mat-icon>
+                        </div>
+                        <h3 class="font-weight-bold m-2" [ngStyle]="{color: data.color} ">
+                            Fecha inicio-fin
+                        </h3>
+                        <mat-form-field appearance="fill" class="col-12">
+                            <mat-date-range-input [rangePicker]="picker">
+                              <input matStartDate  placeholder="Fecha de inicio"> <!--formControlName="start" formControlName="end"-->
+                              <input matEndDate  placeholder="Fecha fin">
+                            </mat-date-range-input>
+                            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #picker></mat-date-range-picker>
+                        </mat-form-field>
+                    </mat-card><br><br>
+                </div>
+                <div class="col-6">
+                    <mat-card class="parent">
+                        <div class="child" [ngStyle]="{background: data.color} ">
+                            <mat-icon>label</mat-icon>
+                        </div>
+                        <h3 class="font-weight-bold m-2" [ngStyle]="{color: data.color} ">
+                            Etiqueta
+                        </h3>
+                        <mat-form-field class="col-12">
+                            <mat-select>
+                                <mat-option *ngFor="let prioridad of priridades" [value]="prioridad.value">
+                                    {{prioridad.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </mat-card><br><br>
+                </div>
+                <div class="col-12">
+                    <mat-card class="parent">
+                        <div class="child" [ngStyle]="{background: data.color} ">
+                            <mat-icon>article</mat-icon>
+                        </div>
+                        <h3 class="font-weight-bold m-2" [ngStyle]="{color: data.color} ">
+                            Descripcion
+                        </h3>
+                        <mat-form-field class="col-12">
+                            <textarea matInput [(ngModel)]="data.text"></textarea>
+                        </mat-form-field>
+                    </mat-card><br><br>
+                </div>
+            </div>
+           
+        </div>
+        <!--Columna lista de actividades-->
+        <mat-card class="col-3" [ngStyle]="{background: data.backgroundColor} ">
+            <mat-card-subtitle [ngStyle]="{color: data.color}"><b>Lista de actividades</b></mat-card-subtitle><br>
+            <div class="container-fluid">
+                <div cdkDropListGroup class="row">
+                    <div class="col-sm-12 col-lg-12 mb-12" *ngFor="let column of activityService.getBoard$() | async">
+
+                        <div cdkDropList [cdkDropListData]="column.list" class="example-list"
+                            (cdkDropListDropped)="drop($event)">
+                            <div cdkDrag class="example-box" [ngStyle]="{background: data.color}" style="color: white"
+                                *ngFor="let item of column.list">
+                                <app-activity-item [item]="item" (emitDeleteCard)="onDeleteCard($event, column.id)">
+                                    <!--div *ngFor="let comment of item.comments">
+                                            <app-comment-item [comment]="comment"
+                                                (emitComment)="onDeleteComment($event, column.id, item)"></app-comment-item>
+                                        </div-->
+                                </app-activity-item>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
     </div>
 </div>
 
 
 <div mat-dialog-actions>
-    <button mat-raised-button [mat-dialog-close]="data.text" cdkFocusInitial color="primary">Guardar</button>
+    <button mat-raised-button [mat-dialog-close]="data.text" cdkFocusInitial [ngStyle]="{background: data.color}"
+        style="color: white">Guardar</button>
     <button mat-button (click)="onNoClick()">Cancelar</button>
 </div>

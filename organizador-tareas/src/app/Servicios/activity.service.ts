@@ -11,42 +11,42 @@ import { ColumnasService } from './columnas.service';
 @Injectable({
     providedIn: 'root',
 })
-export class BoardService {
+export class ActivityService {
     columnasJson: string;
     columnasJsonParse: string;
     codigoTablero: string | null;
 
     constructor(private columnasService: ColumnasService,
         private spinner: NgxSpinnerService,
-        private route: ActivatedRoute,
         private router: Router) {
         this.columnasJson = '';
         this.columnasJsonParse = '';
         this.codigoTablero = '';
     }
 
-    public initBoard: Column[] = this.getColumnById(0);
-    /*[
+    public initBoard: Column[] = //this.getColumnById(0);
+    [
         {
             id: 1,
             title: 'Tareas por hacer',
             color: '#009886',
             list: [
-                {
+              /*  {
                     id: 1,
-                    text: 'Ejemplo de elemento de tarjeta',
-                    like: 1,
-                    comments: [
-                        {
-                            id: 1,
-                            text: 'Comentario'
-                        }
-                    ]
+                    text: 'Primera Actividad',
+                    like: 0,
+                    comments: []
                 },
+                {
+                    id: 2,
+                    text: 'Segunda actividad',
+                    like: 0,
+                    comments: []
+                },*/
             ]
         },
         
-    ]*/
+    ]
 
     public board: Column[] = this.initBoard
     public board$ = new BehaviorSubject<Column[]>(this.initBoard)
@@ -78,9 +78,8 @@ export class BoardService {
         this.board$.next([...this.board]);
     }
 
-    addCard(text: any, columnId: number, tableroId: string | null) {
+    addCard(text: string, columnId: number, tableroId: string | null) {
         this.spinner.show();
-        console.log('obtengo ', text)
         const newCard: Card = {
             id: Date.now(),
             text: text[0],

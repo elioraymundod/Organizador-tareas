@@ -7,6 +7,11 @@ export interface Card {
     id: number,
     text: string,
     like: number,
+    descripcion: string,
+    fechaInicial: string,
+    fechaFin: string,
+    usuarioAsignado: string,
+    prioridad: string,
     comments: Comment[]
 }
 

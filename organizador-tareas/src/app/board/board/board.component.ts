@@ -126,15 +126,49 @@ export class BoardComponent implements OnInit {
     this.router.navigate(['tablero-principal']);
   }
 
-  openTask(data: any) {
+  openTask(data: any, color: any) {
+    let backColor: string = "";
+    switch (color){
+      case "#CD6155":
+          backColor = "#F2D7D5";
+        break;
+      
+      case "#009886": 
+          backColor = "#D0ECE7";
+        break;
+      
+      case "#1976D2":
+          backColor = "#D4E6F1";
+        break;
+
+      case "#6e1d96":
+          backColor = "#E8DAEF";
+        break;
+      
+      case "#FF8F00":
+          backColor = "#FCF3CF";
+        break;
+
+      case "#EC407A":
+          backColor = "#F8BBD0";
+        break;
+
+      case "#34495E":
+          backColor = "#D6DBDF";
+        break;
+    }
+
     const dSeeTask = this.dialog.open(DialogSeeTaskComponent, {
       width: '70%',
-      data: { question: data.text }
+      data: { question: data.text,
+              color: color,
+              backgroundColor: backColor 
+      }
     });
 /*
     dSeeTask.afterClosed().subscribe(result => {
       this.emitText.emit(result)
     });*/
-    console.log('open task', data)
+    console.log('color:', color, 'open task', data)
   }
 }

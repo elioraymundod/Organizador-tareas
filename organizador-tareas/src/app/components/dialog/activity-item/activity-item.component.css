@@ -1,0 +1,27 @@
+.icon {
+    font-size: 18px;
+}
+
+.mat-icon-button {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: color ease .2s;
+}
+
+.mat-icon-button:hover {
+    color: rgb(255, 255, 255);
+}
+
+.mat-icon-button .mat-button-wrapper>* {
+    vertical-align: none !important;
+}
+
+
+
+
+.icon-confirm {
+    font-size: 20px !important;
+}
