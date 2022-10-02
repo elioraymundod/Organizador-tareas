@@ -3,7 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TooltipPosition} from '@angular/material/tooltip';
 
-/*para ejemplo de descripcion de tarea, cambiar esfuerzo*/
+/*para ejemplo de descripcion de tarea*/
 export interface DialogData {
   nombre: string;
   descripcion: string;
