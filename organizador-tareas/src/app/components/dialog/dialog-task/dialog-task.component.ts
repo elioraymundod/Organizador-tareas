@@ -8,7 +8,7 @@ export interface DialogData {
   nombre: string;
   descripcion: string;
 }
-/*para ejemplo de descripcion de tarea*/
+
 
 @Component({
   selector: 'app-dialog-task',
