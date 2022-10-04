@@ -82,3 +82,25 @@ table {
 .alinearDerecha{
     float: right;
 }
+
+.child {
+    min-width: 40px;
+    min-height: 40px;
+    color: white;
+    border-radius: 10px;
+    position: absolute;
+    left: 23px;
+    top: -20px;
+    text-align: center;
+}
+
+.child mat-icon {
+    font-size: 18px !important;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}

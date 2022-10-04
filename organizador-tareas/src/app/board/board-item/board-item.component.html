@@ -1,18 +1,22 @@
 <div class="d-flex justify-content-between align-items-start mb-2">
     <div class="mt-1">{{ item.text }}</div>
+
     <button mat-icon-button class="icon-delete" (click)="onCardDelete(item.id)">
         <mat-icon style="font-size: 18px;">delete</mat-icon>
     </button>
 </div>
 
 <div class="d-flex justify-content-end align-items-center mb-2">
-    <button mat-icon-button class="mt-1" (click)="onCardItemEmit(item, false)">
-        <mat-icon class="icon">thumb_down_off_alt</mat-icon>
+    
+    <!--esfuerzo-->
+        <button mat-icon-button class="mt-1" (click)="onCardItemEmit(item, false)">
+        <mat-icon class="icon">arrow_drop_down</mat-icon>
     </button>
     <button mat-icon-button disableRipple (click)="onCardItemEmit(item, true)">
-        <mat-icon class="icon">thumb_up_off_alt</mat-icon>
+        <mat-icon class="icon">arrow_drop_up</mat-icon>
     </button>
     <span>{{ item.like }}</span>
+
     <button mat-icon-button disableRipple class="ml-2" (click)="onOpenComment()">
         <mat-icon class="icon">chat_bubble_outline</mat-icon>
     </button>
@@ -31,3 +35,4 @@
 
     <ng-content></ng-content>
 </div>
+

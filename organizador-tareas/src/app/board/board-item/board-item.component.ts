@@ -1,4 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import { DialogTaskComponent } from 'src/app/components/dialog/dialog-task/dialog-task.component';
+
 @Component({
   selector: 'app-board-item',
   templateUrl: './board-item.component.html',
@@ -12,7 +16,9 @@ export class BoardItemComponent implements OnInit {
 
   commentInput = ''
   open = false;
-  constructor() { }
+ 
+
+  constructor(private _bottomSheet: MatBottomSheet) { }
 
   ngOnInit(): void { }
 
@@ -32,4 +38,5 @@ export class BoardItemComponent implements OnInit {
   onCardDelete(id: number) {
     this.emitDeleteCard.emit(id)
   }
+
 }

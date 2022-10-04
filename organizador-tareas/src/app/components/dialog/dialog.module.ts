@@ -9,12 +9,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogTaskComponent } from './dialog-task/dialog-task.component';
+import { DialogSeeTaskComponent } from './dialog-see-task/dialog-see-task.component';
+import { MaterialExampleModule } from 'src/material.module';
+import { ActivityItemComponent } from './activity-item/activity-item.component';
 
 @NgModule({
   declarations: [
     DialogComponent,
     DialogBodyComponent,
-    DialogTaskComponent
+    DialogTaskComponent,
+    DialogSeeTaskComponent,
+    ActivityItemComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +27,8 @@ import { DialogTaskComponent } from './dialog-task/dialog-task.component';
     MatButtonModule,
     MatInputModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialExampleModule
   ],
   exports: [
     DialogComponent
