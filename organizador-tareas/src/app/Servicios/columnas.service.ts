@@ -9,10 +9,12 @@ import { environment } from 'src/environments/environment';
 export class ColumnasService {
   baseUrl: string;
   public codigoTablero: string | null;
+  public avance: string | null;
 
   constructor(private http:HttpClient) { 
     this.baseUrl = environment.baseUrl;
     this.codigoTablero = '';
+    this.avance = "0";
   }
 
   public crearColumna(items: any): Observable<any>{

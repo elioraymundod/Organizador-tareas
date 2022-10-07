@@ -25,28 +25,40 @@ export class ActivityService {
     }
 
     public initBoard: Column[] = //this.getColumnById(0);
-        [
-            {
-                id: 1,
-                title: 'Tareas por hacer',
-                color: '#009886',
-                list: [
-                    /*  {
-                          id: 1,
-                          text: 'Primera Actividad',
-                          like: 0,
-                          comments: []
-                      },
-                      {
-                          id: 2,
-                          text: 'Segunda actividad',
-                          like: 0,
-                          comments: []
-                      },*/
-                ]
-            },
-
-        ]
+    [
+        /*{
+            id: 1,
+            title: 'Tareas por hacer',
+            color: '#009886',
+            list: [
+                {
+                    id: 1,
+                    text: "Primera tarea",
+                    like: 2,
+                    descripcion: "",
+                    fechaInicial: "",
+                    fechaFin: "",
+                    usuarioAsignado: "",
+                    prioridad: "",
+                    comments: [],
+                    activities: []
+                },
+                {
+                    id: 2,
+                    text: "Segunda tarea",
+                    like: 2,
+                    descripcion: "",
+                    fechaInicial: "",
+                    fechaFin: "",
+                    usuarioAsignado: "",
+                    prioridad: "",
+                    comments: [],
+                    activities: []
+                },
+            ]
+        },*/
+        
+    ]
 
     public board: Column[] = this.initBoard
     public board$ = new BehaviorSubject<Column[]>(this.initBoard)
@@ -90,6 +102,7 @@ export class ActivityService {
             prioridad: text[5],
             like: 0,
             comments: [],
+            activities: []
         };
 
         this.board = this.board.map((column: Column) => {
@@ -194,6 +207,7 @@ export class ActivityService {
         this.board = [];
         this.board$ = new BehaviorSubject<Column[]>([])
         setTimeout(() => {
+
             // Obtener el codigo del tablero en base a la ruta
             if (codigoTablero == 0) {
                 this.router.navigate([`tablero-principal`]);
@@ -223,6 +237,37 @@ export class ActivityService {
                     return returnColumnas;
                 })
             }
+
+        // Obtener el codigo del tablero en base a la ruta
+        if (codigoTablero == 0) {
+            this.router.navigate([`tablero-principal`]);
+        } else {
+            this.codigoTablero = this.columnasService.codigoTablero;
+            let columnas: String;
+            let returnColumnas: Column[];
+            console.log()
+            //Obtener las columnas segun el codigo del tablero
+            this.columnasService.getColumnaByCodigo(codigoTablero).subscribe(res => {
+                this.spinner.hide();
+                if (res.length == 0) {
+                    Swal.fire(
+                        'Tablero vacío',
+                        'Aún no existen listas de tareas creadas para este tablero, intenta crear una nueva lista presionando el boton "Nueva Lista de Tareas"',
+                        'info'
+                    )
+                    returnColumnas = [];
+                    this.board = returnColumnas;
+                    this.board$ = new BehaviorSubject<Column[]>(returnColumnas)
+                } else {
+                    columnas = String(res[0].COLUMNAS)
+                    returnColumnas = JSON.parse(String(columnas));
+                    this.board = returnColumnas;
+                    this.board$ = new BehaviorSubject<Column[]>(returnColumnas)
+                }
+                return returnColumnas;
+            })
+        }
+
         }, 1000);
         return []
     }

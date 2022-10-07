@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 interface Estados {
-  value: string;
+  value: number;
   viewValue: string;
 }
 
@@ -20,8 +20,8 @@ export class ActivityItemComponent implements OnInit {
   open = false;
 
   estados: Estados[] = [
-    {value: '0', viewValue: 'En proceso'},
-    {value: '1', viewValue: 'Finalizado'},
+    {value: 1, viewValue: 'En proceso'},
+    {value: 2, viewValue: 'Finalizado'},
   ];
 
   constructor() { }

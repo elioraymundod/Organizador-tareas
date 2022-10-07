@@ -9,6 +9,11 @@ export interface DialogData {
   descripcion: string;
 }
 
+export interface Datos{
+  ID: number;
+  NOMBRE: string;
+}
+
 
 @Component({
   selector: 'app-dialog-task',
@@ -18,9 +23,36 @@ export interface DialogData {
 export class DialogTaskComponent implements OnInit {
   descripcion!: string;/*descripcion de tarea*/
 
-  usuario: string[] = ['Melani', 'usuario2', 'usuario3']; /*para asignar usuario*/
+  usuarios: Datos[] = [
+    {
+      ID: 1,
+      NOMBRE: 'Melani'
+    },
+    {
+      ID: 2,
+      NOMBRE: 'usuario2'
+    },
+    {
+      ID: 3,
+      NOMBRE: 'usuario3'
+    }
+  ];
+   /*para asignar usuario*/
   /*position = new FormControl(this.usuario[0]); /*para asignar usuario*/
-  prioridad: string[] = ['Alta', 'Media', 'Baja']; /*prioridad*/
+  prioridades: Datos[] = [
+    {
+      ID: 1,
+      NOMBRE: 'Alta'
+    },
+    {
+      ID: 2,
+      NOMBRE: 'Media'
+    },
+    {
+      ID: 3,
+      NOMBRE: 'Baja'
+    }
+  ]; /*prioridad*/
 
   /*formTask: FormGroup;*/
 

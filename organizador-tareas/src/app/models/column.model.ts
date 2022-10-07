@@ -12,7 +12,14 @@ export interface Card {
     fechaFin: string,
     usuarioAsignado: string,
     prioridad: string,
-    comments: Comment[]
+    comments: Comment[],
+    activities: Actividad[]
+}
+
+export interface Actividad {
+    id: number,
+    nombre: string,
+    estatus: number
 }
 
 export interface Column {
@@ -22,7 +29,21 @@ export interface Column {
     list: Card[]
 }
 
+
 export interface Etiqueta {
     id: number,
     text: string,
+}
+export interface Activity{
+    id: number,
+    text: string,
+    estatus: number
+}
+
+export interface ColumnaTest {
+    id: number,
+    title: string,
+    color: string,
+    list: Activity[]
+
 }
