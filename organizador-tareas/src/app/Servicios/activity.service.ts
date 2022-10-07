@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import Swal from 'sweetalert2';
 import { BoardComponent } from '../board/board/board.component';
 import { Columnas } from '../clases/Columnas.class';
-import { Card, Column, Comment } from '../models/column.model';
+import { Card, Column, Comment, Etiqueta } from '../models/column.model';
 import { ColumnasService } from './columnas.service';
 
 @Injectable({
@@ -25,28 +25,28 @@ export class ActivityService {
     }
 
     public initBoard: Column[] = //this.getColumnById(0);
-    [
-        {
-            id: 1,
-            title: 'Tareas por hacer',
-            color: '#009886',
-            list: [
-              /*  {
-                    id: 1,
-                    text: 'Primera Actividad',
-                    like: 0,
-                    comments: []
-                },
-                {
-                    id: 2,
-                    text: 'Segunda actividad',
-                    like: 0,
-                    comments: []
-                },*/
-            ]
-        },
-        
-    ]
+        [
+            {
+                id: 1,
+                title: 'Tareas por hacer',
+                color: '#009886',
+                list: [
+                    /*  {
+                          id: 1,
+                          text: 'Primera Actividad',
+                          like: 0,
+                          comments: []
+                      },
+                      {
+                          id: 2,
+                          text: 'Segunda actividad',
+                          like: 0,
+                          comments: []
+                      },*/
+                ]
+            },
+
+        ]
 
     public board: Column[] = this.initBoard
     public board$ = new BehaviorSubject<Column[]>(this.initBoard)
@@ -194,35 +194,35 @@ export class ActivityService {
         this.board = [];
         this.board$ = new BehaviorSubject<Column[]>([])
         setTimeout(() => {
-        // Obtener el codigo del tablero en base a la ruta
-        if (codigoTablero == 0) {
-            this.router.navigate([`tablero-principal`]);
-        } else {
-            this.codigoTablero = this.columnasService.codigoTablero;
-            let columnas: String;
-            let returnColumnas: Column[];
-            console.log()
-            //Obtener las columnas segun el codigo del tablero
-            this.columnasService.getColumnaByCodigo(codigoTablero).subscribe(res => {
-                this.spinner.hide();
-                if (res.length == 0) {
-                    Swal.fire(
-                        'Tablero vacío',
-                        'Aún no existen listas de tareas creadas para este tablero, intenta crear una nueva lista presionando el boton "Nueva Columna"',
-                        'info'
-                    )
-                    returnColumnas = [];
-                    this.board = returnColumnas;
-                    this.board$ = new BehaviorSubject<Column[]>(returnColumnas)
-                } else {
-                    columnas = String(res[0].COLUMNAS)
-                    returnColumnas = JSON.parse(String(columnas));
-                    this.board = returnColumnas;
-                    this.board$ = new BehaviorSubject<Column[]>(returnColumnas)
-                }
-                return returnColumnas;
-            })
-        }
+            // Obtener el codigo del tablero en base a la ruta
+            if (codigoTablero == 0) {
+                this.router.navigate([`tablero-principal`]);
+            } else {
+                this.codigoTablero = this.columnasService.codigoTablero;
+                let columnas: String;
+                let returnColumnas: Column[];
+                console.log()
+                //Obtener las columnas segun el codigo del tablero
+                this.columnasService.getColumnaByCodigo(codigoTablero).subscribe(res => {
+                    this.spinner.hide();
+                    if (res.length == 0) {
+                        Swal.fire(
+                            'Tablero vacío',
+                            'Aún no existen listas de tareas creadas para este tablero, intenta crear una nueva lista presionando el boton "Nueva Columna"',
+                            'info'
+                        )
+                        returnColumnas = [];
+                        this.board = returnColumnas;
+                        this.board$ = new BehaviorSubject<Column[]>(returnColumnas)
+                    } else {
+                        columnas = String(res[0].COLUMNAS)
+                        returnColumnas = JSON.parse(String(columnas));
+                        this.board = returnColumnas;
+                        this.board$ = new BehaviorSubject<Column[]>(returnColumnas)
+                    }
+                    return returnColumnas;
+                })
+            }
         }, 1000);
         return []
     }
@@ -270,4 +270,19 @@ export class ActivityService {
 
         this.saveColumn(id, saveColumns);
     }
+
+    //etiqueta
+    addEtiqueta(text: string, idTablero: any) {
+        this.spinner.show();
+        const newEtiqueta: Etiqueta = {
+            id: Date.now(),
+            text: text,
+        };
+
+        this.board = [...this.board];
+        this.saveChanges(idTablero);
+        this.board$.next([...this.board]);
+
+    }
+
 }

@@ -56,6 +56,12 @@ export class BoardComponent implements OnInit {
     }
   }
 
+  onEtiqueta(text: string) {
+    if (text) {
+      this.boardService.etiqueta(text, this.codigoTablero)
+    }
+  }
+
   onDeleteColumn(columnId: number) {
     Swal.fire({
       title: '¿Está seguro que desea eliminar esta lista con todas sus tareas?',
@@ -109,6 +115,13 @@ export class BoardComponent implements OnInit {
   addColumn(event: string) {
     if (event) {
       this.boardService.addColumn(event, this.codigoTablero)
+    }
+  }
+
+   //Agregar nueva etiqueta
+   addEtiqueta(event: string) {
+    if (event) {
+      this.boardService.addEtiqueta(event, this.codigoTablero)
     }
   }
 

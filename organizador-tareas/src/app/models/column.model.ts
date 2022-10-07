@@ -21,3 +21,8 @@ export interface Column {
     color: string,
     list: Card[]
 }
+
+export interface Etiqueta {
+    id: number,
+    text: string,
+}

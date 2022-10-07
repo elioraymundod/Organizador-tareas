@@ -5,13 +5,16 @@ import { BehaviorSubject } from 'rxjs';
 import Swal from 'sweetalert2';
 import { BoardComponent } from '../board/board/board.component';
 import { Columnas } from '../clases/Columnas.class';
-import { Card, Column, Comment } from '../models/column.model';
+import { Card, Column, Comment, Etiqueta} from '../models/column.model';
 import { ColumnasService } from './columnas.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class BoardService {
+    etiqueta(text: string, codigoTablero: string | null) {
+      throw new Error('Method not implemented.');
+    }
     columnasJson: string;
     columnasJsonParse: string;
     codigoTablero: string | null;
@@ -104,6 +107,20 @@ export class BoardService {
         this.saveChanges(tableroId);
 
         this.board$.next([...this.board]);
+    }
+
+    //etiqueta
+    addEtiqueta(text: string, idTablero: any) {
+        this.spinner.show();
+        const newEtiqueta: Etiqueta = {
+            id: Date.now(),
+            text: text,
+        };
+
+        this.board = [...this.board];
+        this.saveChanges(idTablero);
+        this.board$.next([...this.board]);
+
     }
 
     deleteColumn(columnId: number, tableroId: string | null) {

@@ -3,5 +3,5 @@ module.exports={
     user:"root",
     password:"",
     db:"organizador_tareas",
-    port: 3306
+    port: 3308
 }

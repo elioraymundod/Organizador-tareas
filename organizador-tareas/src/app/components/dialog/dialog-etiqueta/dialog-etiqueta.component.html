@@ -1,0 +1,15 @@
+<div mat-dialog-content>
+    <h3>{{data.question}}</h3>
+       <form [formGroup]="formdata">
+        <mat-form-field class="w-100">
+            <mat-label>Etiqueta</mat-label>
+           <!-- <input matInput [(ngModel)]="data.text">-->
+           <input matInput formControlName="nombre">
+        </mat-form-field>
+       </form>
+    </div>
+
+<div mat-dialog-actions>
+    <button mat-raised-button (click)="guardarEtiqueta(formdata.value)" color="primary" >Guardar</button>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+</div>

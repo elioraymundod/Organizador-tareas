@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogBodyComponent } from '../dialog-body/dialog-body.component';
 import { DialogSeeTaskComponent } from '../dialog-see-task/dialog-see-task.component';
 import { DialogTaskComponent } from '../dialog-task/dialog-task.component';
+import { DialogEtiquetaComponent } from '../dialog-etiqueta/dialog-etiqueta.component';
 
 @Component({
   selector: 'app-dialog',
@@ -41,6 +42,17 @@ export class DialogComponent implements OnInit {
         });
 
         dTask.afterClosed().subscribe(result => {
+          this.emitText.emit(result)
+        });
+        break;
+
+        case "etiqueta":
+        const dEtiqueta = this.dialog.open(DialogEtiquetaComponent, {
+          width: '40%',
+          data: { question: this.question }
+        });
+
+        dEtiqueta.afterClosed().subscribe(result => {
           this.emitText.emit(result)
         });
         break;

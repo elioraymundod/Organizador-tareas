@@ -25,7 +25,6 @@ export class DialogBodyComponent implements OnInit {
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
-
   async guardarTarea(datos: any){
     this.spinner.show();
     const tarea = {
@@ -44,7 +43,6 @@ export class DialogBodyComponent implements OnInit {
       FECHA_MODIFICACION: '',
       USUARIO_MODIFICACION: ''
     }
-
     this.tareasService.crearTarea(tarea).subscribed((res: any) => {
       this.spinner.hide();
       Swal.fire({
@@ -64,8 +62,6 @@ export class DialogBodyComponent implements OnInit {
     this.crearTarea.reset();
     this.spinner.show();
   }
-
-
   limpiarForms(): void{
     this.crearTarea.reset();
   }*/

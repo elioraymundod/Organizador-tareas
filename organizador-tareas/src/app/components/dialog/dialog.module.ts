@@ -12,6 +12,7 @@ import { DialogTaskComponent } from './dialog-task/dialog-task.component';
 import { DialogSeeTaskComponent } from './dialog-see-task/dialog-see-task.component';
 import { MaterialExampleModule } from 'src/material.module';
 import { ActivityItemComponent } from './activity-item/activity-item.component';
+import { DialogEtiquetaComponent } from './dialog-etiqueta/dialog-etiqueta.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ActivityItemComponent } from './activity-item/activity-item.component';
     DialogBodyComponent,
     DialogTaskComponent,
     DialogSeeTaskComponent,
-    ActivityItemComponent
+    ActivityItemComponent,
+    DialogEtiquetaComponent
   ],
   imports: [
     CommonModule,
