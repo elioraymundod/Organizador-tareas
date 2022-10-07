@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between align-items-start mb-12">
-    <div class="mt-1">{{ item.text }}</div>
+    <div class="mt-1">{{ item.nombre }}</div>
 
     <button mat-icon-button class="icon-delete" (click)="onCardDelete(item.id)">
         <mat-icon style="font-size: 18px;">delete</mat-icon>
@@ -8,7 +8,7 @@
 <div class="d-flex justify-content-center align-items-center mb-3">
     <mat-form-field appearance="fill" style="color: white;">
         <mat-label style="color: white;">Estado</mat-label>
-        <mat-select >
+        <mat-select [(ngModel)]="item.estatus">
           <mat-option *ngFor="let estado of estados" [value]="estado.value">
             {{estado.viewValue}}
           </mat-option>

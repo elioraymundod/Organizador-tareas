@@ -15,6 +15,9 @@ export class BoardService {
     columnasJson: string;
     columnasJsonParse: string;
     codigoTablero: string | null;
+    actividades: any[] = [];
+    completed: number = 0;
+    resultado: number = 0;
 
     constructor(private columnasService: ColumnasService,
         private spinner: NgxSpinnerService,
@@ -55,6 +58,32 @@ export class BoardService {
         return this.board$.asObservable()
     }
 
+    getActivities$(cardId: any, columnId: any) {
+        this.board$.value.forEach(boa => {
+            if (boa.id == columnId) {
+                boa.list.forEach(data => {
+                    if(data.id === cardId) {
+                        this.actividades = data.activities;
+                    }
+                })
+            }
+        })
+        this.completed = 0;
+        let avance = this.actividades.map((activida: any) => {
+            if (activida.estatus === 2) {
+                this.completed += 1;
+            }
+        })
+        let total = this.actividades.length;
+        if(total != 0) {
+            this.resultado = 100/total;
+            this.resultado *= this.completed;
+        }
+        this.columnasService.avance = this.resultado.toFixed(2);
+        let ac$ = new BehaviorSubject<Column[]>(this.actividades);
+        return ac$.asObservable();
+    }
+
     changeColumnColor(color: string, columnId: number) {
         this.board = this.board.map((column: Column) => {
             if (column.id === columnId) {
@@ -80,7 +109,6 @@ export class BoardService {
 
     addCard(text: any, columnId: number, tableroId: string | null) {
         this.spinner.show();
-        console.log('obtengo ', text)
         const newCard: Card = {
             id: Date.now(),
             text: text[0],
@@ -91,11 +119,12 @@ export class BoardService {
             prioridad: text[5],
             like: 0,
             comments: [],
+            activities: []
         };
 
         this.board = this.board.map((column: Column) => {
             if (column.id === columnId) {
-                column.list = [newCard, ...column.list];
+                column.list = [...column.list, newCard];
             }
             return column;
         });
@@ -116,6 +145,22 @@ export class BoardService {
         this.board = this.board.map((column: Column) => {
             if (column.id === columnId) {
                 column.list = column.list.filter((card: Card) => card.id !== cardId);
+            }
+            return column;
+        });
+        this.saveChanges(tableroId);
+        this.board$.next([...this.board]);
+    }
+
+    deleteActivity(cardId: number, columnId: number, activityId: number, tableroId: string | null) {
+        this.board = this.board.map((column: Column) => {
+            if (column.id === columnId) {
+                const list = column.list.map((card: Card) => {
+                    if (card.id === cardId) {
+                        card.activities = card.activities.filter((actividad: any) => actividad.id !== activityId);
+                    }
+                    return card;
+                });
             }
             return column;
         });
@@ -167,7 +212,28 @@ export class BoardService {
             }
             return column;
         });
+        this.board$.next([...this.board]);
+    }
 
+    addActivity(columnId: number, cardId: number, nombre:string, estado: number) {
+        this.board = this.board.map((column: Column) => {
+            if (column.id === columnId) {
+                const list = column.list.map((card: Card) => {
+                    if (card.id === cardId) {
+                        const newActivity = {
+                            id: Date.now(),
+                            nombre: nombre,
+                            estatus: estado,
+                        };
+                        card.activities = [...card.activities,newActivity];
+                    }
+                    return card;
+                });
+                column.list = list;
+            }
+            return column;
+        });
+        this.saveChanges(this.columnasService.codigoTablero);
         this.board$.next([...this.board]);
     }
 
@@ -209,7 +275,7 @@ export class BoardService {
                 if (res.length == 0) {
                     Swal.fire(
                         'Tablero vacío',
-                        'Aún no existen listas de tareas creadas para este tablero, intenta crear una nueva lista presionando el boton "Nueva Columna"',
+                        'Aún no existen listas de tareas creadas para este tablero, intenta crear una nueva lista presionando el boton "Nueva Lista de Tareas"',
                         'info'
                     )
                     returnColumnas = [];

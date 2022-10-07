@@ -25,3 +25,13 @@
 .icon-confirm {
     font-size: 20px !important;
 }
+
+.not-empty-select.mat-selected {
+    color: white !important;
+  }
+  
+:host /deep/ .mat-select-value-text {
+    color: white !important;
+  }
+
+  

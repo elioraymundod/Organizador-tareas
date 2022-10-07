@@ -26,25 +26,37 @@ export class ActivityService {
 
     public initBoard: Column[] = //this.getColumnById(0);
     [
-        {
+        /*{
             id: 1,
             title: 'Tareas por hacer',
             color: '#009886',
             list: [
-              /*  {
+                {
                     id: 1,
-                    text: 'Primera Actividad',
-                    like: 0,
-                    comments: []
+                    text: "Primera tarea",
+                    like: 2,
+                    descripcion: "",
+                    fechaInicial: "",
+                    fechaFin: "",
+                    usuarioAsignado: "",
+                    prioridad: "",
+                    comments: [],
+                    activities: []
                 },
                 {
                     id: 2,
-                    text: 'Segunda actividad',
-                    like: 0,
-                    comments: []
-                },*/
+                    text: "Segunda tarea",
+                    like: 2,
+                    descripcion: "",
+                    fechaInicial: "",
+                    fechaFin: "",
+                    usuarioAsignado: "",
+                    prioridad: "",
+                    comments: [],
+                    activities: []
+                },
             ]
-        },
+        },*/
         
     ]
 
@@ -90,6 +102,7 @@ export class ActivityService {
             prioridad: text[5],
             like: 0,
             comments: [],
+            activities: []
         };
 
         this.board = this.board.map((column: Column) => {
@@ -208,7 +221,7 @@ export class ActivityService {
                 if (res.length == 0) {
                     Swal.fire(
                         'Tablero vacío',
-                        'Aún no existen listas de tareas creadas para este tablero, intenta crear una nueva lista presionando el boton "Nueva Columna"',
+                        'Aún no existen listas de tareas creadas para este tablero, intenta crear una nueva lista presionando el boton "Nueva Lista de Tareas"',
                         'info'
                     )
                     returnColumnas = [];

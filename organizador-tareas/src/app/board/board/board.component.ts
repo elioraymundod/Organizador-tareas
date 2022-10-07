@@ -126,49 +126,56 @@ export class BoardComponent implements OnInit {
     this.router.navigate(['tablero-principal']);
   }
 
-  openTask(data: any, color: any) {
+  openTask(data: any, color: any, columnId: any) {
     let backColor: string = "";
-    switch (color){
+    switch (color) {
       case "#CD6155":
-          backColor = "#F2D7D5";
+        backColor = "#F2D7D5";
         break;
-      
-      case "#009886": 
-          backColor = "#D0ECE7";
+
+      case "#009886":
+        backColor = "#D0ECE7";
         break;
-      
+
       case "#1976D2":
-          backColor = "#D4E6F1";
+        backColor = "#D4E6F1";
         break;
 
       case "#6e1d96":
-          backColor = "#E8DAEF";
+        backColor = "#E8DAEF";
         break;
-      
+
       case "#FF8F00":
-          backColor = "#FCF3CF";
+        backColor = "#FCF3CF";
         break;
 
       case "#EC407A":
-          backColor = "#F8BBD0";
+        backColor = "#F8BBD0";
         break;
 
       case "#34495E":
-          backColor = "#D6DBDF";
+        backColor = "#D6DBDF";
         break;
     }
 
     const dSeeTask = this.dialog.open(DialogSeeTaskComponent, {
       width: '70%',
-      data: { question: data.text,
-              color: color,
-              backgroundColor: backColor 
+      data: {
+        question: data.text,
+        color: color,
+        backgroundColor: backColor,
+        descripcion: data.descripcion,
+        usuarioAsignado: data.usuarioAsignado,
+        prioridad: data.prioridad,
+        fechaFin: data.fechaFin,
+        fechaInicio: data.fechaInicial,
+        columnId: columnId,
+        cardId: data.id
       }
     });
-/*
-    dSeeTask.afterClosed().subscribe(result => {
-      this.emitText.emit(result)
-    });*/
-    console.log('color:', color, 'open task', data)
+    /*
+        dSeeTask.afterClosed().subscribe(result => {
+          this.emitText.emit(result)
+        });*/
   }
 }

@@ -17,13 +17,13 @@
     </button>
     <span>{{ item.like }}</span>
 
-    <button mat-icon-button disableRipple class="ml-2" (click)="onOpenComment()">
+    <!--button mat-icon-button disableRipple class="ml-2" (click)="onOpenComment()">
         <mat-icon class="icon">chat_bubble_outline</mat-icon>
     </button>
-    <span>{{ item.comments.length }}</span>
+    <span>{{ item.comments.length }}</span-->
 </div>
 
-<div *ngIf="open">
+<!--div *ngIf="open">
     <mat-form-field class="w-100 mb-2">
         <mat-label>Deja un comentario</mat-label>
         <textarea matInput [(ngModel)]="commentInput" (mousedown)="$event.stopPropagation()"></textarea>
@@ -34,5 +34,5 @@
     </mat-form-field>
 
     <ng-content></ng-content>
-</div>
+</div-->
 
