@@ -172,7 +172,7 @@ export class BoardComponent implements OnInit {
     }
 
     const dSeeTask = this.dialog.open(DialogSeeTaskComponent, {
-      width: '70%',
+      width: '90%',
       data: {
         question: data.text,
         color: color,
