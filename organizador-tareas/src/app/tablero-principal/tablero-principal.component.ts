@@ -20,6 +20,11 @@ export class TableroPrincipalComponent implements OnInit{
   displayedColumns: string[] = ['Nombre', 'Abreviatura', 'Descripcion', 'Acciones']
   titulo: String;
   crearProyecto: FormGroup
+  estado = [
+    { id: 1, name: "Público" },
+    { id: 2, name: "Privado" }
+  ];
+  estado_usuario: number = 1 // 0= Público, 1= Privado
 
   @ViewChild(MatPaginator, { static: true })
   paginator!: MatPaginator;
@@ -33,7 +38,8 @@ export class TableroPrincipalComponent implements OnInit{
     this.crearProyecto = this._formBuilder.group({
       nombreProyecto: ['', [Validators.required]],
       abreviatura: ['', [Validators.required]],
-      descripcion: ['', [Validators.required]]
+      descripcion: ['', [Validators.required]],
+      privacidad: ['', [Validators.required]]
     });
   }
 
@@ -41,7 +47,7 @@ export class TableroPrincipalComponent implements OnInit{
     window.localStorage.clear();
     this.spinner.show();
     //Obtener los tableros y mostrarlos en la tabla
-    await this.obtenerAllTableros();  
+    await this.obtenerAllTableros(this.estado_usuario);  
   }
 
   ngAfterViewInit() {
@@ -50,14 +56,22 @@ export class TableroPrincipalComponent implements OnInit{
 
   async guardarProyecto(datos: any){
     this.spinner.show();
+    let estado: number
+    if (this.crearProyecto.get('privacidad')?.value ==1) {
+      estado = 0
+    }
+    else {
+      estado = 1
+    }
     const proyecto = {
       NOMBRE: this.crearProyecto.get('nombreProyecto')?.value,
       ABREVIATURA: this.crearProyecto.get('abreviatura')?.value,
       DESCRIPCION: datos.descripcion,
       FECHA_CREACION: null,
       USUARIO_CREACION: 'elio',
-      FECHA_MODIFICACION: '',
-      USUARIO_MODIFICACION: ''
+      FECHA_MODIFICACION: null,
+      USUARIO_MODIFICACION: '',
+      PRIVACIDAD: estado
     }
 
     this.proyectosService.crearProyecto(proyecto).subscribe(res => {
@@ -77,12 +91,12 @@ export class TableroPrincipalComponent implements OnInit{
     })
     this.crearProyecto.reset();
     this.spinner.show();
-    await this.obtenerAllTableros();   
+    await this.obtenerAllTableros(this.estado_usuario);   
   }
 
   // Obtener todos los tableros creados
-  async obtenerAllTableros(){
-    this.proyectosService.getAllProyectos().subscribe(res => {
+  async obtenerAllTableros(privacidad: number){
+    this.proyectosService.getAllProyectos(privacidad).subscribe(res => {
       this.dataSource.data = res;
       this.dataSource.paginator = this.paginator;
       this.spinner.hide();

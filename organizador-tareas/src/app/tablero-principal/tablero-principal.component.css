@@ -22,3 +22,7 @@ table {
 .botones{
     outline: none;
 }
+
+#boton1 {
+    z-index: 1000;
+    }

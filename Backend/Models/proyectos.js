@@ -20,9 +20,9 @@ module.exports = {
         })
     },
     
-    getAllProyectos() {
+    getAllProyectos(privacidad) {
         return new Promise((resolve, reject) => {
-            con.query('select * from organizador_tareas.proyectos', (err, rows) => {
+            con.query('select * from organizador_tareas.proyectos where privacidad = ?', privacidad, (err, rows) => {
                 if (err) reject(err);
                 else resolve(rows);
             })
