@@ -1,30 +1,85 @@
-<div>
-    <br/>    
-  <form class="form-group row">
-
-    <div class="form-group col-md-3">
-
-        <input type="email" name="email" placeholder="email"class="form-control">
-
-
-    </div>
-
-    <div class="form-group col-md-3">
-
-        <input type="password" name="pasword" placeholder="pasword"class="form-control">
-
-    </div>
-
-    <br/><br/>
-
-    <div>
-
-        <button type="submit"class="btn btn-primary">Login</button>
-
-    </div>
+  <div class="card-body">
     
-  </form>
-    
+    <mat-card class="margenArriba">
+        <mat-card-title class="titulo">Organizador de Tareas</mat-card-title>
+        <div class="m-0 row justify-content-center">
+            <form [formGroup]="datosFormGroup">
+                <div class="col-auto text-center">
+                    <mat-form-field class="col-3">
+                        <mat-label>Nombre de Usuario</mat-label>
+                        <input matInput placeholder=""  formControlName="loginFormControl" autocomplete="off">
+                    </mat-form-field>
+                </div>
+                <div class="col-auto text-center">
+                    <mat-form-field class="col-3">
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput type="password" placeholder=""  formControlName="passFormControl">
+                    </mat-form-field>
+                </div>
+                <div class="col-auto text-center">
+                    <button mat-raised-button class="botones " type="button" (click)="iniciarSesion(datosFormGroup.value)" [disabled]="datosFormGroup.invalid">Iniciar sesion</button>
+                </div><br><br>
+                <div class="col-auto text-center">
+                  <p style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modalNuevoUsuario">¿Aún no tienes una cuenta?</p>
+                </div>
+            </form>
+        </div>
+    </mat-card>
+  </div>
 
+  <!--Modal crear usuario-->
+<div class="modal fade bd-example-modal-lg" id="modalNuevoUsuario" tabindex="-1"
+aria-labelledby="modalNuevoProyectoLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title" id="modalNuevoProyectoLabel">Crea tu cuenta</h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <!--Formulario-->
+      <form [formGroup]="crearUsuario">
+        <!--Nombre del usuario-->
+        <mat-form-field class="example-full-width col-6"  appearance="fill">
+          <mat-label>Nombre y apellido</mat-label>
+          <input matInput formControlName="nombreUsuario" #nom>
+          <mat-hint align="end">{{nom.value.length}} / 50</mat-hint>
+        </mat-form-field>
+        <!--correo-->
+        <mat-form-field class="example-full-width col-6" appearance="fill">
+          <mat-label>Correo electronico</mat-label>
+          <input matInput maxlength="50" formControlName="correo" #ab>
+          <mat-hint align="end">{{ab.value.length}} / 50</mat-hint>
+        </mat-form-field>
+        <br>
+        <!--usuario-->
+        <mat-form-field class="example-full-width col-6" appearance="fill">
+          <mat-label>Usuario</mat-label>
+          <input matInput maxlength="25" formControlName="usuario" #ab>
+          <mat-hint align="end">{{ab.value.length}} / 25</mat-hint>
+        </mat-form-field>
+        <!--contrasena-->
+        <mat-form-field class="example-full-width col-6" appearance="fill">
+          <mat-label>Contraseña</mat-label>
+          <input matInput type="password" maxlength="25" formControlName="pass" #ab>
+          <mat-hint align="end">{{ab.value.length}} / 25</mat-hint>
+        </mat-form-field>
+      </form>
     
+      <!--h3>Tema </h3>
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
+            <button type="button" class="btn btn-primary">Azul</button>
+            <button type="button" class="btn btn-success">Verde</button>
+            <button type="button" class="btn btn-warning">Amarillo</button>
+            <button type="button" class="btn btn-dark">Oscuro</button>
+        </div-->
+      <br>
+      <div class="modal-footer">
+        <button mat-button data-bs-dismiss="modal" (click)="limpiarForms()">Cancelar</button>
+        <button mat-raised-button color="primary" (click)="guardarUsuario(crearUsuario.value)" [disabled]="crearUsuario.invalid" data-bs-dismiss="modal"  class="botones ">Crear
+          Usuario</button>
+      </div>
+    </div>
+  </div>
 </div>
+<!--Fin Modal crear usuario-->

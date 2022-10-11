@@ -2,7 +2,6 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ActivityService } from 'src/app/Servicios/activity.service';
 import { BoardService } from 'src/app/Servicios/board.service';
 import { ColumnasService } from 'src/app/Servicios/columnas.service';
 
@@ -37,7 +36,6 @@ export class DialogSeeTaskComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogSeeTaskComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public activityService: ActivityService,
     public boardService: BoardService,
     private _formBuilder: FormBuilder,
     public columnasService: ColumnasService

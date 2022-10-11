@@ -7,18 +7,16 @@ import { TablerosComponent } from './tableros/tableros.component';
 
 const routes: Routes = [
   {
+    path: 'tablero/:codigo_tablero',
+    component: BoardComponent
+  },
+  {
     path: 'tablero-principal',
     component: TableroPrincipalComponent
   },
-
   {
     path:'login',component:LoginComponent
   },
-  
-  {
-    path: 'tablero/:codigo_tablero',
-    component: BoardComponent
-  }
 ];
 
 @NgModule({

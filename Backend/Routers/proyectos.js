@@ -31,8 +31,8 @@ router.get('/proyectos/:codigoProyecto', (req, res) => {
 
 });
 
-router.get('/obtener/all/proyectos/:privacidad', (req, res) => {
-    proyectos.getAllProyectos(req.params.privacidad)
+router.get('/obtener/all/proyectos/:usuario', (req, res) => {
+    proyectos.getAllProyectos(req.params.usuario)
         .then(proyectos => {
             res.status(200).send(proyectos);
         })

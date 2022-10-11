@@ -22,7 +22,6 @@ export class DialogComponent implements OnInit {
   }
 
   openDialog(): void {
-    console.log('la procedencia es ', this.procedencia)
     switch (this.procedencia) {
       case "columna":
         const dColumn = this.dialog.open(DialogBodyComponent, {

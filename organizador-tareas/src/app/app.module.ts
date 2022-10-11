@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ColumnasService } from './Servicios/columnas.service';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { ColumnasService } from './Servicios/columnas.service';
   ],
   providers: [
     ProyectosServiceService,
-    ColumnasService
+    ColumnasService,
+    DatePipe
   ],
   bootstrap: [
     AppComponent

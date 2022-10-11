@@ -9,6 +9,7 @@ import { ColumnasService } from 'src/app/Servicios/columnas.service';
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogSeeTaskComponent } from 'src/app/components/dialog/dialog-see-task/dialog-see-task.component';
+import { LoginService } from 'src/app/Servicios/LoginService.service';
 
 @Component({
   selector: 'app-board',
@@ -20,6 +21,7 @@ export class BoardComponent implements OnInit {
   tablero: any = [];
   nombreProyecto: String;
   public codigoTablero: string | null;
+  infoTablero: any;
 
 
   constructor(
@@ -29,20 +31,26 @@ export class BoardComponent implements OnInit {
     private router: Router,
     private spinner: NgxSpinnerService,
     private columnasService: ColumnasService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public loginService: LoginService
   ) {
     this.nombreProyecto = '';
     this.codigoTablero = '';
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.spinner.show();
     this.route.paramMap.subscribe(async params => {
       const codigoTablero = params.get('codigo_tablero');
       this.codigoTablero = codigoTablero;
-      this.tablero = await this.getBoardData(codigoTablero);
+      this.tablero = this.getBoardData(codigoTablero);
     });
     this.columnasService.codigoTablero = this.codigoTablero;
+    /*if(this.loginService.userValid == false ){
+      this.router.navigate(['login'])
+    } else {
+      
+    }*/
   }
 
   onColorChange(color: string, columnId: number) {
@@ -126,9 +134,12 @@ export class BoardComponent implements OnInit {
   }
 
   //Obtener informacion de un tablero
-  async getBoardData(codigoTablero: any) {
-    await this.tablerosService.getTableroByCodigo(codigoTablero).subscribe((res: BoardDetalle[]) => {
+  getBoardData(codigoTablero: any) {
+    this.tablerosService.getTableroByCodigo(codigoTablero).subscribe((res: BoardDetalle[]) => {
       this.nombreProyecto = res[0].NOMBRE + ' (' + res[0].ABREVIATURA + ')';
+      if(res[0].PRIVACIDAD == 1) {
+        this.columnasService.tableroPublico = true;        
+      }
     }, err => {
       console.error(err)
     })
@@ -183,12 +194,19 @@ export class BoardComponent implements OnInit {
         fechaFin: data.fechaFin,
         fechaInicio: data.fechaInicial,
         columnId: columnId,
-        cardId: data.id
+        cardId: data.id,
+        informador: data.informador,
+        esfuerzo: data.esfuerzo
       }
     });
     /*
         dSeeTask.afterClosed().subscribe(result => {
           this.emitText.emit(result)
         });*/
+  }
+
+  cerrarSesion(){
+    this.loginService.userValid = false;
+    this.router.navigate(['login']);
   }
 }

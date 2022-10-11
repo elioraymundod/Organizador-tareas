@@ -6,5 +6,6 @@ export interface BoardDetalle {
     FECHA_CREACION: Date,
     USUARIO_CREACION: String,
     FECHA_MODIFICACION: Date,
-    USUARIO_MODIFICACION: String
+    USUARIO_MODIFICACION: String,
+    PRIVACIDAD: Number
 }

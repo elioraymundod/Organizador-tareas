@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 import { BoardService } from '../Servicios/board.service';
+import { LoginService } from '../Servicios/LoginService.service';
 import { ProyectosServiceService } from '../Servicios/proyectos-service.service';
 declare let $: any;
 
@@ -17,7 +18,7 @@ declare let $: any;
 export class TableroPrincipalComponent implements OnInit{
 
   dataSource = new MatTableDataSource();
-  displayedColumns: string[] = ['Nombre', 'Abreviatura', 'Descripcion', 'Acciones']
+  displayedColumns: string[] = ['Nombre', 'Abreviatura', 'Descripcion', 'Privacidad', 'Acciones']
   titulo: String;
   crearProyecto: FormGroup
   estado = [
@@ -33,7 +34,8 @@ export class TableroPrincipalComponent implements OnInit{
               private proyectosService: ProyectosServiceService,
               private router: Router,
               private spinner: NgxSpinnerService,
-              private boardService: BoardService) {
+              private boardService: BoardService,
+              private loginService: LoginService) {
     this.titulo = 'Organizador de Tareas';
     this.crearProyecto = this._formBuilder.group({
       nombreProyecto: ['', [Validators.required]],
@@ -44,10 +46,15 @@ export class TableroPrincipalComponent implements OnInit{
   }
 
   async ngOnInit() {
-    window.localStorage.clear();
-    this.spinner.show();
-    //Obtener los tableros y mostrarlos en la tabla
-    await this.obtenerAllTableros(this.estado_usuario);  
+    if(this.loginService.userValid == false) {
+      this.spinner.hide();
+      this.router.navigate(['login'])
+    } else {
+      window.localStorage.clear();
+      this.spinner.show();
+      //Obtener los tableros y mostrarlos en la tabla
+      await this.obtenerAllTableros(this.loginService.idUser); 
+    } 
   }
 
   ngAfterViewInit() {
@@ -56,22 +63,15 @@ export class TableroPrincipalComponent implements OnInit{
 
   async guardarProyecto(datos: any){
     this.spinner.show();
-    let estado: number
-    if (this.crearProyecto.get('privacidad')?.value ==1) {
-      estado = 0
-    }
-    else {
-      estado = 1
-    }
     const proyecto = {
       NOMBRE: this.crearProyecto.get('nombreProyecto')?.value,
       ABREVIATURA: this.crearProyecto.get('abreviatura')?.value,
       DESCRIPCION: datos.descripcion,
       FECHA_CREACION: null,
-      USUARIO_CREACION: 'elio',
+      USUARIO_CREACION: this.loginService.idUser,
       FECHA_MODIFICACION: null,
       USUARIO_MODIFICACION: '',
-      PRIVACIDAD: estado
+      PRIVACIDAD: datos.privacidad
     }
 
     this.proyectosService.crearProyecto(proyecto).subscribe(res => {
@@ -91,12 +91,12 @@ export class TableroPrincipalComponent implements OnInit{
     })
     this.crearProyecto.reset();
     this.spinner.show();
-    await this.obtenerAllTableros(this.estado_usuario);   
+    this.obtenerAllTableros(this.loginService.idUser);   
   }
 
   // Obtener todos los tableros creados
-  async obtenerAllTableros(privacidad: number){
-    this.proyectosService.getAllProyectos(privacidad).subscribe(res => {
+  obtenerAllTableros(usuario: number){
+    this.proyectosService.getAllProyectos(usuario).subscribe(res => {
       this.dataSource.data = res;
       this.dataSource.paginator = this.paginator;
       this.spinner.hide();
@@ -119,5 +119,10 @@ export class TableroPrincipalComponent implements OnInit{
 
   limpiarForms(){
     this.crearProyecto.reset();
+  }
+
+  cerrarSesion(){
+    this.loginService.userValid = false;
+    this.router.navigate(['login']);
   }
 }

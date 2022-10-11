@@ -20,9 +20,11 @@ module.exports = {
         })
     },
     
-    getAllProyectos(privacidad) {
+    getAllProyectos(user) {
         return new Promise((resolve, reject) => {
-            con.query('select * from organizador_tareas.proyectos where privacidad = ?', privacidad, (err, rows) => {
+            con.query('select pr.*, ca.NOMBRE as nombrePrivacidad from organizador_tareas.proyectos as pr '+
+            'inner join organizador_tareas.cat_dato as ca on ca.ID = pr.PRIVACIDAD '+
+            'where pr.USUARIO_CREACION = ?', user, (err, rows) => {
                 if (err) reject(err);
                 else resolve(rows);
             })

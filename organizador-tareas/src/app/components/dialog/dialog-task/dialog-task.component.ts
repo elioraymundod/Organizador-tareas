@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {TooltipPosition} from '@angular/material/tooltip';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { TooltipPosition } from '@angular/material/tooltip';
+import { LoginService } from 'src/app/Servicios/LoginService.service';
 
 /*para ejemplo de descripcion de tarea*/
 export interface DialogData {
@@ -9,7 +10,7 @@ export interface DialogData {
   descripcion: string;
 }
 
-export interface Datos{
+export interface Datos {
   ID: number;
   NOMBRE: string;
 }
@@ -37,7 +38,7 @@ export class DialogTaskComponent implements OnInit {
       NOMBRE: 'usuario3'
     }
   ];
-   /*para asignar usuario*/
+  /*para asignar usuario*/
   /*position = new FormControl(this.usuario[0]); /*para asignar usuario*/
   prioridades: Datos[] = [
     {
@@ -56,27 +57,20 @@ export class DialogTaskComponent implements OnInit {
 
   /*formTask: FormGroup;*/
 
-    constructor(
-      public dialogRef: MatDialogRef<DialogTaskComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: any,
-      private _formBuilder: FormBuilder
-    ) {
-      /*this.formTask = this._formBuilder.group({
-        tituloControl: ['', (Validators.required)],
-        descripcionControl: ['', (Validators.required)],
-        fechaInicioControl: ['', (Validators.required)],
-        fechaFinControl: ['', (Validators.required)],
-        prioridadControl: ['', (Validators.required)]
-      })*/
-
-     }
+  constructor(
+    public dialogRef: MatDialogRef<DialogTaskComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private _formBuilder: FormBuilder,
+    public loginService: LoginService
+  ) {
+  }
 
   onNoClick(): void {
-      this.dialogRef.close();
-    }
+    this.dialogRef.close();
+  }
 
   ngOnInit(): void {
-    }
-
-
   }
+
+
+}
