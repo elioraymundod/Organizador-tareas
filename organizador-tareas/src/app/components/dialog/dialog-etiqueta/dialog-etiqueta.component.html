@@ -10,6 +10,8 @@
     </div>
 
 <div mat-dialog-actions>
-    <button mat-raised-button (click)="guardarEtiqueta(formdata.value)" color="primary" >Guardar</button>
+   <button mat-raised-button (click)="guardarEtiqueta(formdata.value)" color="primary" >Guardar</button> 
+  <!--    <button mat-raised-button color="primary" (click)="guardarEtiqueta(formdata.value)" 
+    [disabled]="crearEtiqueta.invalid" data-bs-dismiss="modal">Guardar</button> -->
     <button mat-button (click)="onNoClick()">Cancelar</button>
 </div>
