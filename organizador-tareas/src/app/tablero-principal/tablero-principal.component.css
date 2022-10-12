@@ -22,3 +22,7 @@ table {
 .botones{
     outline: none;
 }
+
+::ng-deep .cdk-overlay-container{
+    z-index: 1200 !important;
+}

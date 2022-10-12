@@ -1,12 +1,12 @@
 <p>
     <mat-toolbar>
         <div class="containter col-12">
-            <button mat-icon-button class="example-icon botones" [matMenuTriggerFor]="menu">
+            <button mat-icon-button class="example-icon botones" [matMenuTriggerFor]="menu" *ngIf="this.loginService.userValid == true">
                 <mat-icon>menu</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
                 <button mat-menu-item class="botones" (click)="volverMenuPrincipal()">Ver todos los proyectos</button>
-                <button mat-menu-item class="botones">Cerrar sesion</button>
+                <button mat-menu-item class="botones" (click)="cerrarSesion()">Cerrar sesion</button>
             </mat-menu>
             <span>Organizador de Tareas</span>
             <span class="example-spacer"></span>

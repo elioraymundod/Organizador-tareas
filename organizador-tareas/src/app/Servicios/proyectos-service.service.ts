@@ -21,7 +21,7 @@ export class ProyectosServiceService {
     return this.http.get(`${this.baseUrl}/proyectos/${codigoProyecto}`);
   }
 
-  public getAllProyectos(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/obtener/all/proyectos`);
+  public getAllProyectos(usuario: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/obtener/all/proyectos/${usuario}`);
   }
 }

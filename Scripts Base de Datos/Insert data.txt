@@ -1,0 +1,6 @@
+/* Insert Catalogos */
+insert into organizador_tareas.catalogos (NOMBRE, FECHA_CREACION, USUARIO_CREACION) values ('Privacidad', '2022-03-10', 'master');
+
+/* Insert Datos Catalogos */
+insert into organizador_tareas.cat_dato (NOMBRE, CATALOGO, FECHA_CREACION, USUARIO_CREACION) values ('Público', 1, '2022-03-10', 'master');
+insert into organizador_tareas.cat_dato (NOMBRE, CATALOGO, FECHA_CREACION, USUARIO_CREACION) values ('Privado', 1, '2022-03-10', 'master');

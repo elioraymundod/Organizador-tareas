@@ -13,7 +13,9 @@ export interface Card {
     usuarioAsignado: string,
     prioridad: string,
     comments: Comment[],
-    activities: Actividad[]
+    activities: Actividad[],
+    informador: string,
+    esfuerzo: number
 }
 
 export interface Actividad {

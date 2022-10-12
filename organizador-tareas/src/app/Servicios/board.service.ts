@@ -5,15 +5,16 @@ import { BehaviorSubject } from 'rxjs';
 import Swal from 'sweetalert2';
 import { BoardComponent } from '../board/board/board.component';
 import { Columnas } from '../clases/Columnas.class';
-import { Card, Column, Comment, Etiqueta} from '../models/column.model';
+import { Card, Column, Comment, Etiqueta } from '../models/column.model';
 import { ColumnasService } from './columnas.service';
+import { LoginService } from './LoginService.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class BoardService {
     etiqueta(text: string, codigoTablero: string | null) {
-      throw new Error('Method not implemented.');
+        throw new Error('Method not implemented.');
     }
     columnasJson: string;
     columnasJsonParse: string;
@@ -25,7 +26,8 @@ export class BoardService {
     constructor(private columnasService: ColumnasService,
         private spinner: NgxSpinnerService,
         private route: ActivatedRoute,
-        private router: Router) {
+        private router: Router,
+        private loginService: LoginService) {
         this.columnasJson = '';
         this.columnasJsonParse = '';
         this.codigoTablero = '';
@@ -65,7 +67,7 @@ export class BoardService {
         this.board$.value.forEach(boa => {
             if (boa.id == columnId) {
                 boa.list.forEach(data => {
-                    if(data.id === cardId) {
+                    if (data.id === cardId) {
                         this.actividades = data.activities;
                     }
                 })
@@ -78,8 +80,8 @@ export class BoardService {
             }
         })
         let total = this.actividades.length;
-        if(total != 0) {
-            this.resultado = 100/total;
+        if (total != 0) {
+            this.resultado = 100 / total;
             this.resultado *= this.completed;
         }
         this.columnasService.avance = this.resultado.toFixed(2);
@@ -112,6 +114,7 @@ export class BoardService {
 
     addCard(text: any, columnId: number, tableroId: string | null) {
         this.spinner.show();
+        console.log(text)
         const newCard: Card = {
             id: Date.now(),
             text: text[0],
@@ -122,7 +125,9 @@ export class BoardService {
             prioridad: text[5],
             like: 0,
             comments: [],
-            activities: []
+            activities: [],
+            informador: text[6],
+            esfuerzo: text[7]
         };
 
         this.board = this.board.map((column: Column) => {
@@ -232,7 +237,7 @@ export class BoardService {
         this.board$.next([...this.board]);
     }
 
-    addActivity(columnId: number, cardId: number, nombre:string, estado: number) {
+    addActivity(columnId: number, cardId: number, nombre: string, estado: number) {
         this.board = this.board.map((column: Column) => {
             if (column.id === columnId) {
                 const list = column.list.map((card: Card) => {
@@ -242,7 +247,7 @@ export class BoardService {
                             nombre: nombre,
                             estatus: estado,
                         };
-                        card.activities = [...card.activities,newActivity];
+                        card.activities = [...card.activities, newActivity];
                     }
                     return card;
                 });
@@ -277,36 +282,43 @@ export class BoardService {
         //Limpiar board
         this.board = [];
         this.board$ = new BehaviorSubject<Column[]>([])
+        this.loginService.userValid == true ? this.codigoTablero = codigoTablero : this.codigoTablero = this.columnasService.codigoTablero;
         setTimeout(() => {
-        // Obtener el codigo del tablero en base a la ruta
-        if (codigoTablero == 0) {
-            this.router.navigate([`tablero-principal`]);
-        } else {
-            this.codigoTablero = this.columnasService.codigoTablero;
-            let columnas: String;
-            let returnColumnas: Column[];
-            console.log()
-            //Obtener las columnas segun el codigo del tablero
-            this.columnasService.getColumnaByCodigo(codigoTablero).subscribe(res => {
+            if (this.columnasService.tableroPublico == false && this.loginService.userValid == false) {
+                this.router.navigate([`login`]);
                 this.spinner.hide();
-                if (res.length == 0) {
-                    Swal.fire(
-                        'Tablero vacío',
-                        'Aún no existen listas de tareas creadas para este tablero, intenta crear una nueva lista presionando el boton "Nueva Lista de Tareas"',
-                        'info'
-                    )
-                    returnColumnas = [];
-                    this.board = returnColumnas;
-                    this.board$ = new BehaviorSubject<Column[]>(returnColumnas)
-                } else {
-                    columnas = String(res[0].COLUMNAS)
-                    returnColumnas = JSON.parse(String(columnas));
-                    this.board = returnColumnas;
-                    this.board$ = new BehaviorSubject<Column[]>(returnColumnas)
-                }
-                return returnColumnas;
-            })
-        }
+                return;
+            } 
+            this.codigoTablero = this.columnasService.codigoTablero;
+                let columnas: String;
+                let returnColumnas: Column[];
+                console.log()
+                //Obtener las columnas segun el codigo del tablero
+                this.columnasService.getColumnaByCodigo(this.codigoTablero).subscribe(res => {
+                    this.spinner.hide();
+                    if (res.length == 0) {
+                        Swal.fire(
+                            'Tablero vacío',
+                            'Aún no existen listas de tareas creadas para este tablero, intenta crear una nueva lista presionando el boton "Nueva Lista de Tareas"',
+                            'info'
+                        )
+                        returnColumnas = [];
+                        this.board = returnColumnas;
+                        this.board$ = new BehaviorSubject<Column[]>(returnColumnas)
+                    } else {
+                        columnas = String(res[0].COLUMNAS)
+                        returnColumnas = JSON.parse(String(columnas));
+                        this.board = returnColumnas;
+                        this.board$ = new BehaviorSubject<Column[]>(returnColumnas)
+                    }
+                    return returnColumnas;
+                })
+            this.spinner.hide();
+            if (codigoTablero == 0) {
+
+            } else {
+                
+            }
         }, 1000);
         return []
     }
