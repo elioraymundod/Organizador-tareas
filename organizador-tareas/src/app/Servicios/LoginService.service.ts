@@ -34,6 +34,10 @@ export class LoginService {
     return this.http.get<any>(`${this.baseUrl}/get/usuarios/${user}/${pass}`);
   }
 
+  public getUserById(id: any): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/get/usuarios/por/id/${id}`);
+  }
+
   public getAllUsers(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/get/all/usuarios`);
   }

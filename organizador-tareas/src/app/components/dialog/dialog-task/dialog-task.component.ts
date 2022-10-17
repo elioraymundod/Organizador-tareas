@@ -62,7 +62,6 @@ export class DialogTaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuariosTablerosService.getUsuariosByTablero(this.columnasService.codigoTablero).subscribe(res => {
-      console.log('el res es', res)
       this.usuarios = res;
     })
   }

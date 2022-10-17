@@ -9,13 +9,18 @@
 <div class="d-flex justify-content-end align-items-center mb-2">
     
     <!--esfuerzo-->
-        <button mat-icon-button class="mt-1" (click)="onCardItemEmit(item, false)">
+        <!--button mat-icon-button class="mt-1" (click)="onCardItemEmit(item, false)">
         <mat-icon class="icon">arrow_drop_down</mat-icon>
     </button>
     <button mat-icon-button disableRipple (click)="onCardItemEmit(item, true)">
         <mat-icon class="icon">arrow_drop_up</mat-icon>
-    </button>
-    <span>{{ item.like }}</span>
+        
+    <mat-icon class="icon" >arrow_drop_up</mat-icon>
+    </button-->
+    <mat-icon *ngIf="item.prioridad === '1'" title="Prioridad Alta" style="cursor: pointer;">keyboard_arrow_up</mat-icon>
+    <mat-icon *ngIf="item.prioridad === '2'" title="Prioridad Media" style="cursor: pointer;">unfold_less</mat-icon>
+    <mat-icon *ngIf="item.prioridad === '3'" title="Prioridad Baja" style="cursor: pointer;">keyboard_arrow_down</mat-icon>
+    <span title="Esfuerzo" style="cursor: pointer;">{{ item.esfuerzo }}</span>
 
     <!--button mat-icon-button disableRipple class="ml-2" (click)="onOpenComment()">
         <mat-icon class="icon">chat_bubble_outline</mat-icon>

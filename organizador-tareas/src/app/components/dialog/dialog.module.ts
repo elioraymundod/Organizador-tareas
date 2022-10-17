@@ -15,6 +15,8 @@ import { ActivityItemComponent } from './activity-item/activity-item.component';
 import { DialogEtiquetaComponent } from './dialog-etiqueta/dialog-etiqueta.component';
 import { DialogColaboradorComponent } from './dialog-colaborador/dialog-colaborador.component';
 import { UsuariosTablerosService } from 'src/app/Servicios/usuariosTableros.service';
+import { LoginService } from 'src/app/Servicios/LoginService.service';
+import { EnvioCorreoService } from 'src/app/Servicios/envio-correos.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { UsuariosTablerosService } from 'src/app/Servicios/usuariosTableros.serv
     DialogComponent
   ],
   providers: [
-    UsuariosTablerosService
+    UsuariosTablerosService,
+    LoginService,
+    EnvioCorreoService
   ]
 })
 export class DialogModule { }
