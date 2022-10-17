@@ -148,6 +148,6 @@
 
 <div mat-dialog-actions>
     <button mat-raised-button [mat-dialog-close]="data.text" cdkFocusInitial [ngStyle]="{background: data.color}"
-        style="color: white">Guardar</button>
+        style="color: white" (click)="saveChanges()">Guardar</button>
     <button mat-button (click)="onNoClick()">Cancelar</button>
 </div>

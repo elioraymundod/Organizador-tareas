@@ -2,9 +2,11 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Card, Column } from 'src/app/models/column.model';
 import { BoardService } from 'src/app/Servicios/board.service';
 import { ColumnasService } from 'src/app/Servicios/columnas.service';
 import { UsuariosTablerosService } from 'src/app/Servicios/usuariosTableros.service';
+import Swal from 'sweetalert2';
 
 interface Usuarios {
   ID: string;
@@ -82,4 +84,31 @@ export class DialogSeeTaskComponent implements OnInit {
     this.formActivity.get('nombre')?.setValue(" ")
   }
 
+  saveChanges(){
+    console.log(this.data)
+    console.log(this.boardService.board)
+    this.boardService.board = this.boardService.board.map((column: Column) => {
+      if(column.id === this.data.columnId) {
+        const list = column.list.map((card: Card) => {
+          if(card.id === this.data.cardId) {
+            card.esfuerzo = this.data.esfuerzo
+            card.prioridad = this.data.prioridad
+            card.usuarioAsignado = this.data.usuarioAsignado
+            card.fechaInicial = this.data.fechaInicio
+            card.fechaFin = this.data.fechaFin
+            card.descripcion = this.data.descripcion
+          }
+          return card;
+        });
+        column.list = list;
+      }
+      return column
+    })
+    this.boardService.saveChanges(this.columnasService.codigoTablero);
+    this.boardService.board$.next([...this.boardService.board]);
+    Swal.fire({
+      icon: 'success',
+      title: 'Información almacenada con éxito'
+    })
+  }
 }
