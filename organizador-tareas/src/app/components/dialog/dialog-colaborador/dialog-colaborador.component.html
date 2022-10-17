@@ -1,0 +1,17 @@
+<div mat-dialog-content>
+    <h3>{{data.question}}</h3>
+       <form [formGroup]="formdata">
+        <mat-form-field class="w-100">
+            <mat-label>Invitar colaborador</mat-label>
+           <!-- <input matInput [(ngModel)]="data.text">-->
+           <input matInput formControlName="correo">
+        </mat-form-field>
+       </form>
+    </div>
+
+<div mat-dialog-actions>
+   <button mat-raised-button (click)="enviarCorreo(formdata.value)" color="primary" >Enviar invitacion</button> 
+  <!--    <button mat-raised-button color="primary" (click)="guardarEtiqueta(formdata.value)" 
+    [disabled]="crearEtiqueta.invalid" data-bs-dismiss="modal">Guardar</button> -->
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+</div>

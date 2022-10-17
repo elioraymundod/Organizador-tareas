@@ -3,6 +3,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TooltipPosition } from '@angular/material/tooltip';
 import { LoginService } from 'src/app/Servicios/LoginService.service';
+import { UsuariosTablerosService } from 'src/app/Servicios/usuariosTableros.service';
+import { ColumnasService } from 'src/app/Servicios/columnas.service';
 
 /*para ejemplo de descripcion de tarea*/
 export interface DialogData {
@@ -24,20 +26,7 @@ export interface Datos {
 export class DialogTaskComponent implements OnInit {
   descripcion!: string;/*descripcion de tarea*/
 
-  usuarios: Datos[] = [
-    {
-      ID: 1,
-      NOMBRE: 'Melani'
-    },
-    {
-      ID: 2,
-      NOMBRE: 'usuario2'
-    },
-    {
-      ID: 3,
-      NOMBRE: 'usuario3'
-    }
-  ];
+  usuarios: any[] = [];
   /*para asignar usuario*/
   /*position = new FormControl(this.usuario[0]); /*para asignar usuario*/
   prioridades: Datos[] = [
@@ -61,7 +50,9 @@ export class DialogTaskComponent implements OnInit {
     public dialogRef: MatDialogRef<DialogTaskComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _formBuilder: FormBuilder,
-    public loginService: LoginService
+    public loginService: LoginService,
+    private usuariosTablerosService: UsuariosTablerosService,
+    private columnasService: ColumnasService
   ) {
   }
 
@@ -70,6 +61,10 @@ export class DialogTaskComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.usuariosTablerosService.getUsuariosByTablero(this.columnasService.codigoTablero).subscribe(res => {
+      console.log('el res es', res)
+      this.usuarios = res;
+    })
   }
 
 

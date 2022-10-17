@@ -25,6 +25,8 @@ app.use(require('./Routers/proyectos'));
 app.use(require('./Routers/columnas'));
 app.use(require('./Routers/etiqueta'));
 app.use(require('./Routers/Usuarios'));
+app.use(require('./Routers/envioCorreo'));
+app.use(require('./Routers/usuariosTableros'));
 
 app.listen(app.get('port'),()=>{
     console.log(`Server rum on port ${app.get('port')}`)

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BoardService } from 'src/app/Servicios/board.service';
 import { ColumnasService } from 'src/app/Servicios/columnas.service';
+import { UsuariosTablerosService } from 'src/app/Servicios/usuariosTableros.service';
 
 interface Usuarios {
   ID: string;
@@ -20,11 +21,7 @@ export class DialogSeeTaskComponent implements OnInit {
   formActivity: FormGroup;
   avance: any;
 
-  usuarios: Usuarios[] = [
-    {ID: '1', NOMBRE: 'Melani'},
-    {ID: '2', NOMBRE: 'Elio'},
-    {ID: '3', NOMBRE: 'Selvin'},
-  ];
+  usuarios: any[] = [];
 
   priridades: Usuarios[] = [
     {ID: '1', NOMBRE: 'Alta'},
@@ -38,13 +35,21 @@ export class DialogSeeTaskComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public boardService: BoardService,
     private _formBuilder: FormBuilder,
-    public columnasService: ColumnasService
+    public columnasService: ColumnasService,
+    private usuariosTablerosService: UsuariosTablerosService
   ) { 
     this.formActivity = this._formBuilder.group({
       nombre: ['', Validators.required]
     });
 
     this.avance = this.columnasService.avance;
+
+    this.usuariosTablerosService.getUsuariosByTablero(this.columnasService.codigoTablero).subscribe(res => {
+      this.usuarios = res;
+      this.usuarios.forEach(usuario => {
+        usuario.ID = String(usuario.ID)
+      })
+    })
   }
 
   drop(event: CdkDragDrop<any[]>) {

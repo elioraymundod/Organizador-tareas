@@ -137,6 +137,7 @@ export class BoardComponent implements OnInit {
   getBoardData(codigoTablero: any) {
     this.tablerosService.getTableroByCodigo(codigoTablero).subscribe((res: BoardDetalle[]) => {
       this.nombreProyecto = res[0].NOMBRE + ' (' + res[0].ABREVIATURA + ')';
+      this.columnasService.nombreTablero = this.nombreProyecto;
       if(res[0].PRIVACIDAD == 1) {
         this.columnasService.tableroPublico = true;        
       }

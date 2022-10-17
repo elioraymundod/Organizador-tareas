@@ -13,6 +13,8 @@ import { DialogSeeTaskComponent } from './dialog-see-task/dialog-see-task.compon
 import { MaterialExampleModule } from 'src/material.module';
 import { ActivityItemComponent } from './activity-item/activity-item.component';
 import { DialogEtiquetaComponent } from './dialog-etiqueta/dialog-etiqueta.component';
+import { DialogColaboradorComponent } from './dialog-colaborador/dialog-colaborador.component';
+import { UsuariosTablerosService } from 'src/app/Servicios/usuariosTableros.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { DialogEtiquetaComponent } from './dialog-etiqueta/dialog-etiqueta.compo
     DialogTaskComponent,
     DialogSeeTaskComponent,
     ActivityItemComponent,
-    DialogEtiquetaComponent
+    DialogEtiquetaComponent,
+    DialogColaboradorComponent
   ],
   imports: [
     CommonModule,
@@ -34,6 +37,9 @@ import { DialogEtiquetaComponent } from './dialog-etiqueta/dialog-etiqueta.compo
   ],
   exports: [
     DialogComponent
+  ],
+  providers: [
+    UsuariosTablerosService
   ]
 })
 export class DialogModule { }
