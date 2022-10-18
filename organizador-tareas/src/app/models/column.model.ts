@@ -1,6 +1,7 @@
 export interface Comment {
     id: number,
     text: string,
+    creador: string
 }
 
 export interface Card {

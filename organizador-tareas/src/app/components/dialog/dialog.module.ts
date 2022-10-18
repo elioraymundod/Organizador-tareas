@@ -17,6 +17,8 @@ import { DialogColaboradorComponent } from './dialog-colaborador/dialog-colabora
 import { UsuariosTablerosService } from 'src/app/Servicios/usuariosTableros.service';
 import { LoginService } from 'src/app/Servicios/LoginService.service';
 import { EnvioCorreoService } from 'src/app/Servicios/envio-correos.service';
+import { ComentariosComponent } from './comentarios/comentarios.component';
+import { BoardService } from 'src/app/Servicios/board.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { EnvioCorreoService } from 'src/app/Servicios/envio-correos.service';
     DialogSeeTaskComponent,
     ActivityItemComponent,
     DialogEtiquetaComponent,
-    DialogColaboradorComponent
+    DialogColaboradorComponent,
+    ComentariosComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +46,8 @@ import { EnvioCorreoService } from 'src/app/Servicios/envio-correos.service';
   providers: [
     UsuariosTablerosService,
     LoginService,
-    EnvioCorreoService
+    EnvioCorreoService,
+    BoardService
   ]
 })
 export class DialogModule { }

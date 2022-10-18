@@ -22,22 +22,42 @@
     <mat-icon *ngIf="item.prioridad === '3'" title="Prioridad Baja" style="cursor: pointer;">keyboard_arrow_down</mat-icon>
     <span title="Esfuerzo" style="cursor: pointer;">{{ item.esfuerzo }}</span>
 
-    <!--button mat-icon-button disableRipple class="ml-2" (click)="onOpenComment()">
-        <mat-icon class="icon">chat_bubble_outline</mat-icon>
+    <button mat-icon-button disableRipple class="ml-2" title="Cantidad comentarios" style="cursor: pointer;" > <!--data-bs-toggle="modal" data-bs-target="#modalComentario"-->
+        <mat-icon class="icon" title="Cantidad comentarios" style="cursor: pointer;">chat_bubble_outline</mat-icon>
     </button>
-    <span>{{ item.comments.length }}</span-->
+    <span>{{ item.comments.length }}</span>
 </div>
 
 <!--div *ngIf="open">
-    <mat-form-field class="w-100 mb-2">
-        <mat-label>Deja un comentario</mat-label>
-        <textarea matInput [(ngModel)]="commentInput" (mousedown)="$event.stopPropagation()"></textarea>
-        <button mat-button *ngIf="commentInput" matSuffix mat-icon-button color="primary" class="icon-confirm"
-            (click)="onCommentTextEmit(item.id)">
-            <mat-icon>done</mat-icon>
-        </button>
-    </mat-form-field>
-
-    <ng-content></ng-content>
+    
 </div-->
+
+
+<!--Modal crear Proyecto-->
+<div class="modal fade bd-example-modal-lg" id="modalComentario" tabindex="-1"
+  aria-labelledby="modalNuevoProyectoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="modalNuevoProyectoLabel">Comentarios</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <mat-form-field class="w-100 mb-2">
+            <mat-label>Deja un comentario</mat-label>
+            <textarea matInput [(ngModel)]="commentInput" (mousedown)="$event.stopPropagation()"></textarea>
+            <button mat-button *ngIf="commentInput" matSuffix mat-icon-button color="primary" class="icon-confirm"
+                (click)="onCommentTextEmit(item.id)">
+                <mat-icon>done</mat-icon>
+            </button>
+        </mat-form-field>
+    
+        <ng-content></ng-content>
+        <br>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Fin Modal crear Proyecto-->
 

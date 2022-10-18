@@ -109,3 +109,9 @@ table {
 }
 
 
+.bordeDiv {
+    border-top-width: thick;
+    border-right-width: thick;
+    border-bottom-width: thick;
+    border-left-width: thick;
+  }

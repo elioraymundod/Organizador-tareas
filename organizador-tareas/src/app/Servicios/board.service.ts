@@ -223,6 +223,7 @@ export class BoardService {
                         const newComment = {
                             id: Date.now(),
                             text,
+                            creador: this.loginService.nombreUsuario
                         };
                         card.comments = [newComment, ...card.comments];
                     }
@@ -234,6 +235,7 @@ export class BoardService {
             return column;
         });
         this.board$.next([...this.board]);
+        this.saveChanges(this.columnasService.codigoTablero)
     }
 
     addActivity(columnId: number, cardId: number, nombre: string, estado: number) {
@@ -274,6 +276,7 @@ export class BoardService {
             return column
         })
         this.board$.next([...this.board])
+        this.saveChanges(this.columnasService.codigoTablero)
     }
 
     getColumnById(codigoTablero: any): Column[] {

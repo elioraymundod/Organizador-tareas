@@ -197,7 +197,8 @@ export class BoardComponent implements OnInit {
         columnId: columnId,
         cardId: data.id,
         informador: data.informador,
-        esfuerzo: data.esfuerzo
+        esfuerzo: data.esfuerzo,
+        comments: data.comments
       }
     });
     /*

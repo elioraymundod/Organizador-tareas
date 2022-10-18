@@ -22,9 +22,14 @@ interface Usuarios {
   styleUrls: ['./dialog-see-task.component.css']
 })
 export class DialogSeeTaskComponent implements OnInit {
+  @Input() item: any;
+  @Output() emitText: EventEmitter<{ id: number; text: string }> = new EventEmitter();
+
   formActivity: FormGroup;
   avance: any;
   usuarios: any[] = [];
+  commentInput = ''
+  comments: any[] = []
 
   priridades: Usuarios[] = [
     {ID: '1', NOMBRE: 'Alta'},
@@ -55,6 +60,42 @@ export class DialogSeeTaskComponent implements OnInit {
         usuario.ID = String(usuario.ID)
       })
     })
+
+    this.comments = this.data.comments
+  }
+
+  onCommentTextEmit(id: number) {
+    this.emitText.emit({ id, text: this.commentInput });
+    this.commentInput = ''
+  }
+
+  onDeleteComment(comment: { id: any; }, columnId: any){
+    this.boardService.deleteComment(columnId, this.data.cardId, comment.id)
+    this.boardService.board = this.boardService.board.map((column: Column) => {
+      if (column.id === columnId) {
+        const list = column.list.map((card: Card) => {
+          if(card.id === this.data.cardId) {
+            this.comments = card.comments
+          }
+        })
+      }
+      return column;
+    })
+  }
+
+  onAddComment(event: { text: string }, columnId: number) {
+    this.boardService.addComment(columnId, this.data.cardId, event.text)
+    this.boardService.board = this.boardService.board.map((column: Column) => {
+      if (column.id === columnId) {
+        const list = column.list.map((card: Card) => {
+          if(card.id === this.data.cardId) {
+            this.comments = card.comments
+          }
+        })
+      }
+      return column;
+    })
+    this.commentInput = ''
   }
 
   drop(event: CdkDragDrop<any[]>) {
