@@ -1,5 +1,8 @@
 <div mat-dialog-content>
+<<<<<<< HEAD
     <mat-card-title [ngStyle]="{color: data.color}">{{data.question}}</mat-card-title><br>
+=======
+>>>>>>> 60fe1c889723c8e1143a2fb66c8613934c16a01a
     <mat-card-title [ngStyle]="{color: data.color}">{{data.question}}</mat-card-title>
     <mat-card-subtitle>Informador: {{data.informador}}</mat-card-subtitle><br>
 
@@ -163,11 +166,33 @@
                 </div>
             </div>
         </mat-card>
+    </div><hr>
+    <div class="row">
+        <h1 class="modal-title" >Comentarios</h1>
+        <mat-form-field class="w-100 mb-2">
+            <mat-label>Deja un comentario</mat-label>
+            <textarea matInput [(ngModel)]="commentInput" (mousedown)="$event.stopPropagation()"></textarea>
+            <button mat-button *ngIf="commentInput" matSuffix mat-icon-button color="primary" class="icon-confirm"
+                (click)="onAddComment({text: commentInput}, data.columnId)">
+                <mat-icon>done</mat-icon>
+            </button>
+        </mat-form-field>
+    
+        <ng-content></ng-content>
+        <div *ngFor="let comment of this.comments" >
+            <app-comentarios [comment]="comment"
+                (emitComment)="onDeleteComment($event, data.columnId)"></app-comentarios>
+        </div>
     </div>
 </div>
 <div mat-dialog-actions>
 
     <button mat-raised-button [mat-dialog-close]="data.text" cdkFocusInitial [ngStyle]="{background: data.color}"
+<<<<<<< HEAD
         style="color: white" >Guardar</button>
 <button mat-button (click)="onNoClick()">Cancelar</button>
+=======
+        style="color: white" (click)="saveChanges()">Guardar</button>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+>>>>>>> 60fe1c889723c8e1143a2fb66c8613934c16a01a
 </div>

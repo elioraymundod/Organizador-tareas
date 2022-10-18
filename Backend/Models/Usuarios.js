@@ -58,4 +58,14 @@ module.exports={
             });
         });
     },
+
+    getUsuarioById(id){
+        return new Promise((resolve,reject)=>{
+            con.query('select * from organizador_tareas.usuarios as us ' +
+            'where us.ID = ?', id,(err,rows)=>{
+                if(err) reject(err);
+                else resolve(rows);
+            })
+        })
+    }, 
 }

@@ -32,6 +32,20 @@ router.get('/get/usuarios/:user/:pass', (req, res) => {
 
 });
 
+router.get('/get/usuarios/por/id/:id', (req, res) => {
+    users.getUsuarioById(req.params.id)
+        .then(user => {
+            res.status(200).send(user);
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(404).send({
+                mesage: 'Error al obtener datos'
+            });
+        });
+
+});
+
 router.get('/get/all/usuarios', (req, res) => {
     users.getAlllUsers()
         .then(user => {

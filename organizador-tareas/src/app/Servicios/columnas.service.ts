@@ -11,12 +11,14 @@ export class ColumnasService {
   public codigoTablero: string | null;
   public tableroPublico: boolean | null;
   public avance: string | null;
+  public nombreTablero: String | null;
 
   constructor(private http:HttpClient) { 
     this.baseUrl = environment.baseUrl;
     this.codigoTablero = '';
     this.avance = "0";
     this.tableroPublico = false;
+    this.nombreTablero = "";
   }
 
   public crearColumna(items: any): Observable<any>{

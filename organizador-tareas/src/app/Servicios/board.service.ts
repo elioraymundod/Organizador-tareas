@@ -114,7 +114,6 @@ export class BoardService {
 
     addCard(text: any, columnId: number, tableroId: string | null) {
         this.spinner.show();
-        console.log(text)
         const newCard: Card = {
             id: Date.now(),
             text: text[0],
@@ -225,6 +224,7 @@ export class BoardService {
                         const newComment = {
                             id: Date.now(),
                             text,
+                            creador: this.loginService.nombreUsuario
                         };
                         card.comments = [newComment, ...card.comments];
                     }
@@ -236,6 +236,7 @@ export class BoardService {
             return column;
         });
         this.board$.next([...this.board]);
+        this.saveChanges(this.columnasService.codigoTablero)
     }
 
     addActivity(columnId: number, cardId: number, nombre: string, estado: number) {
@@ -276,6 +277,7 @@ export class BoardService {
             return column
         })
         this.board$.next([...this.board])
+        this.saveChanges(this.columnasService.codigoTablero)
     }
 
     getColumnById(codigoTablero: any): Column[] {
@@ -293,7 +295,6 @@ export class BoardService {
             this.codigoTablero = this.columnasService.codigoTablero;
                 let columnas: String;
                 let returnColumnas: Column[];
-                console.log()
                 //Obtener las columnas segun el codigo del tablero
                 this.columnasService.getColumnaByCodigo(this.codigoTablero).subscribe(res => {
                     this.spinner.hide();
@@ -330,7 +331,6 @@ export class BoardService {
             this.spinner.hide();
             if (res.length == 0) {
                 this.columnasService.crearColumna(saveColumns).subscribe(res => {
-                    console.log(saveColumns)
                     this.spinner.hide();
                 }, err => {
                     Swal.fire({

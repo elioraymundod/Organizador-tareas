@@ -36,6 +36,17 @@
                     </button>
                 </app-dialog>
             </div>
+
+             <!-- Agregar nueva etiqueta -->
+             <div class="alinearDerecha">
+                <app-dialog (emitText)="addEtiqueta($event)" [procedencia]="'colaborador'"
+                    question="Enviar invitación para participar del tablero" class="btn">
+                    <button mat-raised-button color="primary" class="btn">
+                        Invitar colaborador
+                        <mat-icon>add_circle</mat-icon>
+                    </button>
+                </app-dialog>
+            </div>
         
 
         </div>

@@ -8,31 +8,66 @@
 
 <div class="d-flex justify-content-end align-items-center mb-2">
     
+<<<<<<< HEAD
     <!--esfuerzo
         <button mat-icon-button class="mt-1" (click)="onCardItemEmit(item, false)">
+=======
+    <!--esfuerzo-->
+        <!--button mat-icon-button class="mt-1" (click)="onCardItemEmit(item, false)">
+>>>>>>> 60fe1c889723c8e1143a2fb66c8613934c16a01a
         <mat-icon class="icon">arrow_drop_down</mat-icon>
     </button>
     <button mat-icon-button disableRipple (click)="onCardItemEmit(item, true)">
         <mat-icon class="icon">arrow_drop_up</mat-icon>
+<<<<<<< HEAD
     </button>
     <span>{{ item.like }}</span>-->
+=======
+        
+    <mat-icon class="icon" >arrow_drop_up</mat-icon>
+    </button-->
+    <mat-icon *ngIf="item.prioridad === '1'" title="Prioridad Alta" style="cursor: pointer;">keyboard_arrow_up</mat-icon>
+    <mat-icon *ngIf="item.prioridad === '2'" title="Prioridad Media" style="cursor: pointer;">unfold_less</mat-icon>
+    <mat-icon *ngIf="item.prioridad === '3'" title="Prioridad Baja" style="cursor: pointer;">keyboard_arrow_down</mat-icon>
+    <span title="Esfuerzo" style="cursor: pointer;">{{ item.esfuerzo }}</span>
+>>>>>>> 60fe1c889723c8e1143a2fb66c8613934c16a01a
 
-    <!--button mat-icon-button disableRipple class="ml-2" (click)="onOpenComment()">
-        <mat-icon class="icon">chat_bubble_outline</mat-icon>
+    <button mat-icon-button disableRipple class="ml-2" title="Cantidad comentarios" style="cursor: pointer;" > <!--data-bs-toggle="modal" data-bs-target="#modalComentario"-->
+        <mat-icon class="icon" title="Cantidad comentarios" style="cursor: pointer;">chat_bubble_outline</mat-icon>
     </button>
-    <span>{{ item.comments.length }}</span-->
+    <span>{{ item.comments.length }}</span>
 </div>
 
 <!--div *ngIf="open">
-    <mat-form-field class="w-100 mb-2">
-        <mat-label>Deja un comentario</mat-label>
-        <textarea matInput [(ngModel)]="commentInput" (mousedown)="$event.stopPropagation()"></textarea>
-        <button mat-button *ngIf="commentInput" matSuffix mat-icon-button color="primary" class="icon-confirm"
-            (click)="onCommentTextEmit(item.id)">
-            <mat-icon>done</mat-icon>
-        </button>
-    </mat-form-field>
-
-    <ng-content></ng-content>
+    
 </div-->
+
+
+<!--Modal crear Proyecto-->
+<div class="modal fade bd-example-modal-lg" id="modalComentario" tabindex="-1"
+  aria-labelledby="modalNuevoProyectoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="modalNuevoProyectoLabel">Comentarios</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <mat-form-field class="w-100 mb-2">
+            <mat-label>Deja un comentario</mat-label>
+            <textarea matInput [(ngModel)]="commentInput" (mousedown)="$event.stopPropagation()"></textarea>
+            <button mat-button *ngIf="commentInput" matSuffix mat-icon-button color="primary" class="icon-confirm"
+                (click)="onCommentTextEmit(item.id)">
+                <mat-icon>done</mat-icon>
+            </button>
+        </mat-form-field>
+    
+        <ng-content></ng-content>
+        <br>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Fin Modal crear Proyecto-->
 
