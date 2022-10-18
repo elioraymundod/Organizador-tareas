@@ -17,11 +17,15 @@ export class EtiquetasService {
     return this.http.post(`${this.baseUrl}/etiqueta`, items);
   }
 
-  public getColumnaByCodigo(codigoColumna: any): Observable<any> {
+  /*public getColumnaByCodigo(codigoColumna: any): Observable<any> {
     return this.http.get(`${this.baseUrl}/columnas/${codigoColumna}`);
   }
 
   public updateColumna(items: any): Observable<any>{
-    return this.http.put(`${this.baseUrl}/columnas/actualizar`, items);
+    return this.http.put(`${this.baseUrl}/etiquetas/actualizar`, items);
+  }*/
+
+  public getEtiquetaByTablero(codigoTablero: any): Observable<any> {
+    return this.http.get(`${this.baseUrl}/obtener/all/etiqueta/${codigoTablero}`);
   }
 }

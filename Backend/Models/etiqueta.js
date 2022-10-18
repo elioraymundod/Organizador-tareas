@@ -20,9 +20,9 @@ module.exports = {
         })
     },
     
-    getAllEtiquetas() {
+    getAllEtiquetas(tablero) {
         return new Promise((resolve, reject) => {
-            con.query('select * from organizador_tareas.etiquetas', (err, rows) => {
+            con.query('select * from organizador_tareas.etiquetas where TABLERO=?', tablero, (err, rows) => {
                 if (err) reject(err);
                 else resolve(rows);
             })

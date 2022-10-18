@@ -50,6 +50,7 @@
 
     <br>
     <div mat-dialog-actions>
-        <button mat-raised-button [mat-dialog-close]="[data.text, data.descripcion, data.fechaInicial, data.fechaFin, data.usuarioAsignado, data.prioridad, this.loginService.nombreUsuario, data.esfuerzo]" cdkFocusInitial color="primary">Guardar</button>
+        <button mat-raised-button [mat-dialog-close]="[data.text, data.descripcion, data.fechaInicial, data.fechaFin, 
+        data.usuarioAsignado, data.prioridad, this.loginService.nombreUsuario, data.esfuerzo]" cdkFocusInitial color="primary">Guardar</button>
         <button mat-button (click)="onNoClick()">Cancelar</button>
     </div>

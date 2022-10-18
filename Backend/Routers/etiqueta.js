@@ -31,8 +31,8 @@ router.get('/etiqueta/:codigoEtiqueta', (req, res) => {
 
 });
 
-router.get('/obtener/all/etiqueta', (req, res) => {
-    etiqueta.getAllEtiquetas()
+router.get('/obtener/all/etiqueta/:tablero', (req, res) => {
+    etiqueta.getAllEtiquetas(req.params.tablero)
         .then(etiqueta => {
             res.status(200).send(etiqueta);
         })

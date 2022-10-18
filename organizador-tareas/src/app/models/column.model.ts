@@ -15,7 +15,8 @@ export interface Card {
     comments: Comment[],
     activities: Actividad[],
     informador: string,
-    esfuerzo: number
+    esfuerzo: number,
+    etiqueta: string
 }
 
 export interface Actividad {
@@ -30,7 +31,6 @@ export interface Column {
     color: string,
     list: Card[]
 }
-
 
 export interface Etiqueta {
     id: number,
@@ -47,5 +47,4 @@ export interface ColumnaTest {
     title: string,
     color: string,
     list: Activity[]
-
 }

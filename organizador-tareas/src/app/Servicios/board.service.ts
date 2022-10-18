@@ -127,7 +127,8 @@ export class BoardService {
             comments: [],
             activities: [],
             informador: text[6],
-            esfuerzo: text[7]
+            esfuerzo: text[7],
+            etiqueta: ''
         };
 
         this.board = this.board.map((column: Column) => {

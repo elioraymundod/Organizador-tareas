@@ -1,15 +1,22 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Card, Column } from 'src/app/models/column.model';
 import { BoardService } from 'src/app/Servicios/board.service';
 import { ColumnasService } from 'src/app/Servicios/columnas.service';
+import { EtiquetasService } from 'src/app/Servicios/etiquetas.service';
+import Swal from 'sweetalert2';
 
 interface Usuarios {
   ID: string;
   NOMBRE: string;
 }
 
+interface Etiqueta {
+  ID: string;
+  NOMBRE: string;
+}
 
 @Component({
   selector: 'app-dialog-see-task',
@@ -21,30 +28,40 @@ export class DialogSeeTaskComponent implements OnInit {
   avance: any;
 
   usuarios: Usuarios[] = [
-    {ID: '1', NOMBRE: 'Melani'},
-    {ID: '2', NOMBRE: 'Elio'},
-    {ID: '3', NOMBRE: 'Selvin'},
+    { ID: '1', NOMBRE: 'Melani' },
+    { ID: '2', NOMBRE: 'Elio' },
+    { ID: '3', NOMBRE: 'Selvin' },
   ];
 
   priridades: Usuarios[] = [
+    { ID: '1', NOMBRE: 'Alta' },
+    { ID: '2', NOMBRE: 'Media' },
+    { ID: '3', NOMBRE: 'Baja' },
+  ];
+  //etiquetas
+  etiqueta = new FormControl('');
+  /*etiquetasList: Etiquetas[] = [
     {ID: '1', NOMBRE: 'Alta'},
     {ID: '2', NOMBRE: 'Media'},
     {ID: '3', NOMBRE: 'Baja'},
-  ];
-
+  ];*/
+  etiquetasList: any[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<DialogSeeTaskComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public boardService: BoardService,
     private _formBuilder: FormBuilder,
-    public columnasService: ColumnasService
-  ) { 
+    public columnasService: ColumnasService,
+    public etiquetasService: EtiquetasService
+  ) {
     this.formActivity = this._formBuilder.group({
       nombre: ['', Validators.required]
     });
 
     this.avance = this.columnasService.avance;
+    this.getEtiquetas()
+
   }
 
   drop(event: CdkDragDrop<any[]>) {
@@ -63,7 +80,6 @@ export class DialogSeeTaskComponent implements OnInit {
     this.boardService.deleteActivity(cardId, columnId, activityId, this.columnasService.codigoTablero)
   }
 
-  
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -77,4 +93,10 @@ export class DialogSeeTaskComponent implements OnInit {
     this.formActivity.get('nombre')?.setValue(" ")
   }
 
-}
+  getEtiquetas() {
+    this.etiquetasService.getEtiquetaByTablero(this.columnasService.codigoTablero).subscribe(res => {
+      this.etiquetasList = res
+    })
+  }
+
+  }

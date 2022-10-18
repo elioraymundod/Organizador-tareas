@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogSeeTaskComponent } from 'src/app/components/dialog/dialog-see-task/dialog-see-task.component';
 import { LoginService } from 'src/app/Servicios/LoginService.service';
+import { EtiquetasService } from 'src/app/Servicios/etiquetas.service';
 
 @Component({
   selector: 'app-board',
@@ -32,7 +33,8 @@ export class BoardComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private columnasService: ColumnasService,
     public dialog: MatDialog,
-    public loginService: LoginService
+    public loginService: LoginService,
+    public etiquetasService: EtiquetasService
   ) {
     this.nombreProyecto = '';
     this.codigoTablero = '';
@@ -94,10 +96,10 @@ export class BoardComponent implements OnInit {
     this.boardService.deleteCard(cardId, columnId, this.codigoTablero)
   }
 
-  onChangeLike(event: { card: any, increase: boolean }, columnId: number) {
+  /*onChangeLike(event: { card: any, increase: boolean }, columnId: number) {
     const { card: { id }, increase } = event
     this.boardService.changeLike(id, columnId, increase)
-  }
+  }*/
 
   onAddComment(event: { id: number, text: string }, columnId: number) {
     this.boardService.addComment(columnId, event.id, event.text)
@@ -196,7 +198,7 @@ export class BoardComponent implements OnInit {
         columnId: columnId,
         cardId: data.id,
         informador: data.informador,
-        esfuerzo: data.esfuerzo
+        esfuerzo: data.esfuerzo,
       }
     });
     /*
