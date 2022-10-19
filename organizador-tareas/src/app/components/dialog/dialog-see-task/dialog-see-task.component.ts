@@ -5,20 +5,16 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Card, Column } from 'src/app/models/column.model';
 import { BoardService } from 'src/app/Servicios/board.service';
 import { ColumnasService } from 'src/app/Servicios/columnas.service';
-<<<<<<< HEAD
 import { EtiquetasService } from 'src/app/Servicios/etiquetas.service';
-=======
 import { EnvioCorreoService } from 'src/app/Servicios/envio-correos.service';
 import { LoginService } from 'src/app/Servicios/LoginService.service';
 import { UsuariosTablerosService } from 'src/app/Servicios/usuariosTableros.service';
->>>>>>> 60fe1c889723c8e1143a2fb66c8613934c16a01a
 import Swal from 'sweetalert2';
 
 interface Usuarios {
   ID: string;
   NOMBRE: string;
 }
-
 interface Etiqueta {
   ID: string;
   NOMBRE: string;
@@ -29,26 +25,22 @@ interface Etiqueta {
   templateUrl: './dialog-see-task.component.html',
   styleUrls: ['./dialog-see-task.component.css']
 })
-export class DialogSeeTaskComponent implements OnInit {
+export class DialogSeeTaskComponent implements OnInit{
   @Input() item: any;
   @Output() emitText: EventEmitter<{ id: number; text: string }> = new EventEmitter();
-
-  formActivity: FormGroup;
+  formActivity: FormGroup
   avance: any;
-<<<<<<< HEAD
-
-  usuarios: Usuarios[] = [
+ /* usuarios: Usuarios[] = [
     { ID: '1', NOMBRE: 'Melani' },
     { ID: '2', NOMBRE: 'Elio' },
     { ID: '3', NOMBRE: 'Selvin' },
-  ];
-=======
-  usuarios: any[] = [];
-  commentInput = ''
-  comments: any[] = []
->>>>>>> 60fe1c889723c8e1143a2fb66c8613934c16a01a
+  ];*/
 
-  priridades: Usuarios[] = [
+  usuarios: any[] = [];
+  commentInput = '';
+  comments: any[] = [];
+
+  prioridades: Usuarios[] = [
     { ID: '1', NOMBRE: 'Alta' },
     { ID: '2', NOMBRE: 'Media' },
     { ID: '3', NOMBRE: 'Baja' },
@@ -68,24 +60,17 @@ export class DialogSeeTaskComponent implements OnInit {
     public boardService: BoardService,
     private _formBuilder: FormBuilder,
     public columnasService: ColumnasService,
-<<<<<<< HEAD
-    public etiquetasService: EtiquetasService
-  ) {
-=======
+    public etiquetasService: EtiquetasService,
     private usuariosTablerosService: UsuariosTablerosService,
     private loginService: LoginService,
     private envioCorreo: EnvioCorreoService
-  ) { 
->>>>>>> 60fe1c889723c8e1143a2fb66c8613934c16a01a
+  ) {  
     this.formActivity = this._formBuilder.group({
       nombre: ['', Validators.required]
     });
 
     this.avance = this.columnasService.avance;
-<<<<<<< HEAD
     this.getEtiquetas()
-
-=======
 
     this.usuariosTablerosService.getUsuariosByTablero(this.columnasService.codigoTablero).subscribe(res => {
       this.usuarios = res;
@@ -96,6 +81,10 @@ export class DialogSeeTaskComponent implements OnInit {
 
     this.comments = this.data.comments
   }
+  
+  ngOnInit(): void {
+    throw new Error('Method not implemented.')
+  } 
 
   onCommentTextEmit(id: number) {
     this.emitText.emit({ id, text: this.commentInput });
@@ -129,7 +118,6 @@ export class DialogSeeTaskComponent implements OnInit {
       return column;
     })
     this.commentInput = ''
->>>>>>> 60fe1c889723c8e1143a2fb66c8613934c16a01a
   }
 
   drop(event: CdkDragDrop<any[]>) {
@@ -152,8 +140,8 @@ export class DialogSeeTaskComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  ngOnInit(): void {
-  }
+ /* ngOnInit(): void {
+  }*/
 
   onAddActivities(columnId: number, cardId: number) { //event: { id: number, nombre: string, status: number}, columnId: number
     let nombre = this.formActivity.get('nombre')?.value;
@@ -161,15 +149,12 @@ export class DialogSeeTaskComponent implements OnInit {
     this.formActivity.get('nombre')?.setValue(" ")
   }
 
-<<<<<<< HEAD
   getEtiquetas() {
     this.etiquetasService.getEtiquetaByTablero(this.columnasService.codigoTablero).subscribe(res => {
       this.etiquetasList = res
     })
   }
 
-  }
-=======
   saveChanges(){
     this.boardService.board = this.boardService.board.map((column: Column) => {
       if(column.id === this.data.columnId) {
@@ -185,6 +170,7 @@ export class DialogSeeTaskComponent implements OnInit {
             card.usuarioAsignado = this.data.usuarioAsignado
             card.fechaInicial = this.data.fechaInicio
             card.fechaFin = this.data.fechaFin
+            card.etiqueta = this.data.etiqueta
             card.descripcion = this.data.descripcion
           }
           return card;
@@ -359,4 +345,15 @@ a[x-apple-data-detectors] {
     this.envioCorreo.enviarCorreo(datosCorreo).subscribe(res => {});
   }
 }
->>>>>>> 60fe1c889723c8e1143a2fb66c8613934c16a01a
+
+function ngOnInit() {
+  throw new Error('Function not implemented.');
+}
+function saveChanges() {
+  throw new Error('Function not implemented.');
+}
+
+function enviarCorreoTareaAsignada(email: any, any: any) {
+  throw new Error('Function not implemented.');
+}
+

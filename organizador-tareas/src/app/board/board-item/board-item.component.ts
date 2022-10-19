@@ -16,7 +16,6 @@ export class BoardItemComponent implements OnInit {
 
   commentInput = ''
   open = false;
- 
 
   constructor(private _bottomSheet: MatBottomSheet) { }
 
@@ -37,6 +36,11 @@ export class BoardItemComponent implements OnInit {
 
   onCardDelete(id: number) {
     this.emitDeleteCard.emit(id)
+  }
+
+  onCardCopy(id: number) {
+    const objeto = { id, name};
+const objetoClonado = Object.assign({}, objeto);
   }
 
 }
