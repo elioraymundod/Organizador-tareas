@@ -43,4 +43,8 @@ export class BoardItemComponent implements OnInit {
 const objetoClonado = Object.assign({}, objeto);
   }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> bbde4865be224016ad3078250246a2f742cd610c

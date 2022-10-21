@@ -356,3 +356,7 @@ function saveChanges() {
 function enviarCorreoTareaAsignada(email: any, any: any) {
   throw new Error('Function not implemented.');
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> bbde4865be224016ad3078250246a2f742cd610c

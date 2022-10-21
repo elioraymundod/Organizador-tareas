@@ -24,7 +24,6 @@ export class BoardComponent implements OnInit {
   public codigoTablero: string | null;
   infoTablero: any;
 
-
   constructor(
     public boardService: BoardService,
     private tablerosService: ProyectosServiceService,
@@ -50,8 +49,7 @@ export class BoardComponent implements OnInit {
     this.columnasService.codigoTablero = this.codigoTablero;
     /*if(this.loginService.userValid == false ){
       this.router.navigate(['login'])
-    } else {
-      
+    } else {   
     }*/
   }
 
@@ -196,12 +194,16 @@ export class BoardComponent implements OnInit {
         prioridad: data.prioridad,
         fechaFin: data.fechaFin,
         fechaInicio: data.fechaInicial,
+        etiqueta: data.etiqueta,
         columnId: columnId,
         cardId: data.id,
         informador: data.informador,
         esfuerzo: data.esfuerzo,
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> bbde4865be224016ad3078250246a2f742cd610c
         comments: data.comments
 
       }
