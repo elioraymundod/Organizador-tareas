@@ -1,0 +1,66 @@
+<div class="container text-center">
+  <div class="text-uppercase fw-bold" mat-dialog-title>
+    Editar Tablero {{ dataTablero.ID }}
+  </div>
+</div>
+<div mat-dialog-content>
+  <!-- <p>{{ dataTablero | json }}</p> -->
+  <div class="container">
+    <form [formGroup]="formEdit">
+      <!--Nombre del proyecto-->
+      <mat-form-field class="example-full-width col-6" appearance="fill">
+        <mat-label>Nombre del tablero</mat-label>
+        <input matInput formControlName="nombreProyecto" #nom />
+        <mat-hint align="end">{{ nom.value.length }} / 50</mat-hint>
+      </mat-form-field>
+      <!--Equipo-->
+      <mat-form-field class="example-full-width col-6" appearance="fill">
+        <mat-label>Abreviatura</mat-label>
+        <input matInput maxlength="3" formControlName="abreviatura" #ab />
+        <mat-hint align="end">{{ ab.value.length }} / 3</mat-hint>
+      </mat-form-field>
+      <br />
+      <!--Descripcion-->
+      <mat-form-field class="col-12">
+        <mat-label>Descripción</mat-label>
+        <textarea
+          matInput
+          #desc
+          placeholder=""
+          maxlength="1000"
+          required
+          formControlName="descripcion"
+        ></textarea>
+        <mat-hint align="end">{{ desc.value.length }} / 1000</mat-hint>
+      </mat-form-field>
+      <!--PRIVADO O PÚBLICO-->
+      <mat-form-field class="example-full-width col-6" appearance="fill">
+        <mat-label>Acceso</mat-label>
+        <mat-select formControlName="privacidad">
+          <mat-option *ngFor="let state of estado" [value]="state.id">{{
+            state.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="container text-center">
+    <button
+      mat-raised-button
+      color="warn"
+      class="btn me-2 mt-3"
+      (click)="cancelar()"
+    >
+      Cancelar
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      class="btn"
+      [disabled]="!formEdit.valid"
+      (click)="guardar()"
+    >
+      Guardar
+    </button>
+  </div>
+</div>

@@ -19,6 +19,7 @@ import { LoginService } from 'src/app/Servicios/LoginService.service';
 import { EnvioCorreoService } from 'src/app/Servicios/envio-correos.service';
 import { ComentariosComponent } from './comentarios/comentarios.component';
 import { BoardService } from 'src/app/Servicios/board.service';
+import { EditTableroComponent } from './edit-tablero/edit-tablero.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { BoardService } from 'src/app/Servicios/board.service';
     ActivityItemComponent,
     DialogEtiquetaComponent,
     DialogColaboradorComponent,
-    ComentariosComponent
+    ComentariosComponent,
+    EditTableroComponent
   ],
   imports: [
     CommonModule,

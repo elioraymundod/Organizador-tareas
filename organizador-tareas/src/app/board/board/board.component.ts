@@ -200,10 +200,10 @@ export class BoardComponent implements OnInit {
         cardId: data.id,
         informador: data.informador,
         esfuerzo: data.esfuerzo,
-<<<<<<< HEAD
-=======
+
+
         comments: data.comments
->>>>>>> 60fe1c889723c8e1143a2fb66c8613934c16a01a
+
       }
     });
     /*

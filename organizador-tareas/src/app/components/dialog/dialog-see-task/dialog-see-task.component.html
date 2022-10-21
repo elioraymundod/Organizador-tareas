@@ -1,8 +1,5 @@
 <div mat-dialog-content>
-<<<<<<< HEAD
     <mat-card-title [ngStyle]="{color: data.color}">{{data.question}}</mat-card-title><br>
-=======
->>>>>>> 60fe1c889723c8e1143a2fb66c8613934c16a01a
     <mat-card-title [ngStyle]="{color: data.color}">{{data.question}}</mat-card-title>
     <mat-card-subtitle>Informador: {{data.informador}}</mat-card-subtitle><br>
 
@@ -40,7 +37,7 @@
                         </div>
                         <mat-form-field class="col-12">
                             <mat-select [(ngModel)]="data.prioridad">
-                                <mat-option *ngFor="let prioridad of priridades" [value]="prioridad.ID">
+                                <mat-option *ngFor="let prioridad of prioridades" [value]="prioridad.ID">
                                     {{prioridad.NOMBRE}}
                                 </mat-option>
                             </mat-select>
@@ -97,7 +94,7 @@
                         </div>
                         <mat-form-field class="col-12">
                             <mat-select>
-                                <mat-option *ngFor="let prioridad of priridades" [value]="prioridad.ID">
+                                <mat-option *ngFor="let prioridad of prioridades" [value]="prioridad.ID">
                                     {{prioridad.NOMBRE}}
                                 </mat-option>
                             </mat-select>
@@ -162,7 +159,7 @@
                         <app-activity-item [item]="column"
                             (emitDeleteCard)="onDeleteCard(data.cardId, data.columnId, column.id)">
                         </app-activity-item>
-                    </div>
+                     </div>
                 </div>
             </div>
         </mat-card>
@@ -188,11 +185,6 @@
 <div mat-dialog-actions>
 
     <button mat-raised-button [mat-dialog-close]="data.text" cdkFocusInitial [ngStyle]="{background: data.color}"
-<<<<<<< HEAD
-        style="color: white" >Guardar</button>
-<button mat-button (click)="onNoClick()">Cancelar</button>
-=======
         style="color: white" (click)="saveChanges()">Guardar</button>
-    <button mat-button (click)="onNoClick()">Cancelar</button>
->>>>>>> 60fe1c889723c8e1143a2fb66c8613934c16a01a
+<button mat-button (click)="onNoClick()">Cancelar</button>        
 </div>
