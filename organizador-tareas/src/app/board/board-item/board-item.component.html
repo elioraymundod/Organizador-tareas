@@ -26,7 +26,9 @@
       <!--
     <mat-icon class="icon" >arrow_drop_up</mat-icon>
     </button-->
-    <span *ngIf="">*</span>
+    <span *ngIf="(this.difference(item.fechaFin) <= -3) ">En tiempo</span>
+    <span *ngIf="(this.difference(item.fechaFin) > -3 && this.difference(item.fechaFin) <= 0) && (item.fechaFin !== undefined)">Próxima a vencer</span>
+    <span *ngIf="(this.difference(item.fechaFin) > 0) && (item.fechaFin !== undefined)">Vencida</span>
     <mat-icon *ngIf="item.prioridad === '1'" title="Prioridad Alta" style="cursor: pointer;">keyboard_arrow_up</mat-icon>
     <mat-icon *ngIf="item.prioridad === '2'" title="Prioridad Media" style="cursor: pointer;">unfold_less</mat-icon>
     <mat-icon *ngIf="item.prioridad === '3'" title="Prioridad Baja" style="cursor: pointer;">keyboard_arrow_down</mat-icon>
@@ -68,4 +70,3 @@
     </div>
   </div>
   <!--Fin Modal crear Proyecto-->
-

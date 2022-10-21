@@ -1,14 +1,20 @@
 <p>
   <mat-toolbar>
     <div class="containter col-12">
-      <button mat-icon-button class="example-icon botones" [matMenuTriggerFor]="menu">
+      <button
+        mat-icon-button
+        class="example-icon botones"
+        [matMenuTriggerFor]="menu"
+      >
         <mat-icon>menu</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item class="botones">Acerca de</button>
-        <button mat-menu-item class="botones" (click)="cerrarSesion()">Cerrar sesion</button>
+        <!--button mat-menu-item class="botones">Acerca de</button-->
+        <button mat-menu-item class="botones" (click)="cerrarSesion()">
+          Cerrar sesion
+        </button>
       </mat-menu>
-      <span>{{titulo}}</span>
+      <span>{{ titulo }}</span>
       <span class="example-spacer"></span>
       <!--button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
           <mat-icon>favorite</mat-icon>
@@ -16,7 +22,13 @@
         <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
         <mat-icon>share</mat-icon>
         <-- Button modal Crear proyecto-->
-      <button mat-raised-button class="btn" color="primary" data-bs-toggle="modal" data-bs-target="#modalNuevoProyecto">
+      <button
+        mat-raised-button
+        class="btn"
+        color="primary"
+        data-bs-toggle="modal"
+        data-bs-target="#modalNuevoProyecto"
+      >
         Nuevo Tablero
         <mat-icon>add_circle</mat-icon>
       </button>
@@ -29,32 +41,38 @@
   <form class="example-form">
     <mat-form-field class="example-full-width col-3">
       <mat-label>Realizar busqueda</mat-label>
-      <input matInput (keyup)="filtroTableros($event)">
+      <input matInput (keyup)="filtroTableros($event)" />
     </mat-form-field>
   </form>
 
   <section>
     <table mat-table [dataSource]="dataSource">
-
       <ng-container matColumnDef="Nombre">
-        <th mat-header-cell *matHeaderCellDef class="headerTable"> Nombre </th>
-        <td mat-cell *matCellDef="let element"> {{element.NOMBRE}}</td>
+        <th mat-header-cell *matHeaderCellDef class="headerTable">Nombre</th>
+        <td mat-cell *matCellDef="let element">{{ element.NOMBRE }}</td>
       </ng-container>
 
-
       <ng-container matColumnDef="Abreviatura">
-        <th mat-header-cell *matHeaderCellDef class="headerTable"> Abreviatura </th>
-        <td mat-cell *matCellDef="let element"> {{element.ABREVIATURA}} </td>
+        <th mat-header-cell *matHeaderCellDef class="headerTable">
+          Abreviatura
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.ABREVIATURA }}</td>
       </ng-container>
 
       <ng-container matColumnDef="Descripcion">
-        <th mat-header-cell *matHeaderCellDef class="headerTable"> Descripcion </th>
-        <td mat-cell *matCellDef="let element"> {{element.DESCRIPCION}} </td>
+        <th mat-header-cell *matHeaderCellDef class="headerTable">
+          Descripcion
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.DESCRIPCION }}</td>
       </ng-container>
 
       <ng-container matColumnDef="Privacidad">
-        <th mat-header-cell *matHeaderCellDef class="headerTable"> Privacidad </th>
-        <td mat-cell *matCellDef="let element"> {{element.nombrePrivacidad}} </td>
+        <th mat-header-cell *matHeaderCellDef class="headerTable">
+          Privacidad
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.nombrePrivacidad }}
+        </td>
       </ng-container>
 
       <!--ng-container matColumnDef="Responsable">
@@ -63,66 +81,105 @@
       </ng-container-->
 
       <ng-container matColumnDef="Acciones">
-        <th mat-header-cell *matHeaderCellDef class="headerTable"> Acciones </th>
+        <th mat-header-cell *matHeaderCellDef class="headerTable">Acciones</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button title="Ver tablero" (click)="verTablero(element.ID)">
+          <button
+            mat-icon-button
+            matTooltip="Ver tablero"
+            (click)="verTablero(element.ID)"
+          >
             <!--[routerLink]="['detalle', evento.codigoEvento, 9]"-->
-            <mat-icon>
-              visibility
-            </mat-icon>
+            <mat-icon> visibility </mat-icon>
+          </button>
+
+          <button
+            mat-icon-button
+            matTooltip="Editar Tablero"
+            (click)="editarTablero(element)"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button
+            mat-icon-button
+            matTooltip="Eliminar Tablero"
+            (click)="eliminarTablero(element.ID)"
+          >
+            <mat-icon>delete</mat-icon>
           </button>
         </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[15]" showFirstLastButtons></mat-paginator>
+    <mat-paginator
+      [pageSizeOptions]="[15]"
+      showFirstLastButtons
+    ></mat-paginator>
   </section>
 </div>
 
-
 <!--Modal crear Proyecto-->
-<div class="modal fade bd-example-modal-lg" id="modalNuevoProyecto" tabindex="-1"
-  aria-labelledby="modalNuevoProyectoLabel" aria-hidden="true">
+<div
+  class="modal fade bd-example-modal-lg"
+  id="modalNuevoProyecto"
+  tabindex="-1"
+  aria-labelledby="modalNuevoProyectoLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title" id="modalNuevoProyectoLabel">Nuevo tablero</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <!--Formulario-->
         <form [formGroup]="crearProyecto">
           <!--Nombre del proyecto-->
-          <mat-form-field class="example-full-width col-6"  appearance="fill">
+          <mat-form-field class="example-full-width col-6" appearance="fill">
             <mat-label>Nombre del tablero</mat-label>
-            <input matInput formControlName="nombreProyecto" #nom>
-            <mat-hint align="end">{{nom.value.length}} / 50</mat-hint>
+            <input matInput formControlName="nombreProyecto" #nom />
+            <mat-hint align="end">{{ nom.value.length }} / 50</mat-hint>
           </mat-form-field>
           <!--Equipo-->
           <mat-form-field class="example-full-width col-6" appearance="fill">
             <mat-label>Abreviatura</mat-label>
-            <input matInput maxlength="3" formControlName="abreviatura" #ab>
-            <mat-hint align="end">{{ab.value.length}} / 3</mat-hint>
+            <input matInput maxlength="3" formControlName="abreviatura" #ab />
+            <mat-hint align="end">{{ ab.value.length }} / 3</mat-hint>
           </mat-form-field>
-          <br>
+          <br />
           <!--Descripcion-->
           <mat-form-field class="col-12">
             <mat-label>Descripción</mat-label>
-            <textarea matInput #desc placeholder="" maxlength="1000" required formControlName="descripcion"></textarea>
-            <mat-hint align="end">{{desc.value.length}} / 1000</mat-hint>
+            <textarea
+              matInput
+              #desc
+              placeholder=""
+              maxlength="1000"
+              required
+              formControlName="descripcion"
+            ></textarea>
+            <mat-hint align="end">{{ desc.value.length }} / 1000</mat-hint>
           </mat-form-field>
-            <!--PRIVADO O PÚBLICO-->
-            <mat-form-field class="example-full-width col-6" appearance="fill">
-              <mat-label >Acceso</mat-label>
-              <mat-select formControlName="privacidad">
-                <mat-option *ngFor="let country of estado" [value]="country.id">{{country.name}}</mat-option>
-              </mat-select>
-            </mat-form-field>
+          <!--PRIVADO O PÚBLICO-->
+          <mat-form-field class="example-full-width col-6" appearance="fill">
+            <mat-label>Acceso</mat-label>
+            <mat-select formControlName="privacidad">
+              <mat-option *ngFor="let country of estado" [value]="country.id">{{
+                country.name
+              }}</mat-option>
+            </mat-select>
+          </mat-form-field>
         </form>
-      
+
         <!--h3>Tema </h3>
           <div class="btn-group" role="group" aria-label="Basic outlined example">
               <button type="button" class="btn btn-primary">Azul</button>
@@ -130,13 +187,23 @@
               <button type="button" class="btn btn-warning">Amarillo</button>
               <button type="button" class="btn btn-dark">Oscuro</button>
           </div-->
-        <br>
+        <br />
         <div class="modal-footer">
-          <button mat-button data-bs-dismiss="modal" (click)="limpiarForms()">Cancelar</button>
-          <button mat-raised-button color="primary" (click)="guardarProyecto(crearProyecto.value)" [disabled]="crearProyecto.invalid" data-bs-dismiss="modal">Crear
-            Tablero</button>
+          <button mat-button data-bs-dismiss="modal" (click)="limpiarForms()">
+            Cancelar
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="guardarProyecto(crearProyecto.value)"
+            [disabled]="crearProyecto.invalid"
+            data-bs-dismiss="modal"
+          >
+            Crear Tablero
+          </button>
         </div>
       </div>
     </div>
   </div>
   <!--Fin Modal crear Proyecto-->
+</div>

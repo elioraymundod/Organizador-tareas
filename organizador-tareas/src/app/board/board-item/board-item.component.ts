@@ -17,23 +17,26 @@ export class BoardItemComponent implements OnInit {
 
   commentInput = ''
   open = false;
+  hoy: Date;
 
   constructor(private _bottomSheet: MatBottomSheet) {
+    this.hoy = new Date()
   }
 
   ngOnInit(): void {
-    let days = this.difference(new Date(), new Date(this.item.fechaFin))//new Date().getDay() - new Date(this.item.fechaFin).getDay()
-    console.log(days)
+    //let days = this.difference(new Date(), new Date(this.item.fechaFin))//new Date().getDay() - new Date(this.item.fechaFin).getDay()
+    //console.log(days)
   }
 
-  difference(date1: Date, date2: Date) {
+  difference(date2: Date): number {
     if (date2 !== undefined) {
-      const date1utc = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
-      const date2utc = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
+      const date1utc = Date.UTC(this.hoy.getFullYear(), this.hoy.getMonth(), this.hoy.getDate());
+      const date2utc = Date.UTC(new Date(date2).getFullYear(), new Date(date2).getMonth(), new Date(date2).getDate());
       let day = 1000 * 60 * 60 * 24;
+      console.log((date2utc - date1utc) / day)
       return (date2utc - date1utc) / day
     } else {
-      return false;
+      return 0;
     }
   }
 
@@ -58,5 +61,4 @@ export class BoardItemComponent implements OnInit {
     const objeto = { id, name };
     const objetoClonado = Object.assign({}, objeto);
   }
-
 }
