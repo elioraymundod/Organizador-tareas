@@ -1,6 +1,7 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { DialogTaskComponent } from 'src/app/components/dialog/dialog-task/dialog-task.component';
 
 @Component({
@@ -17,9 +18,24 @@ export class BoardItemComponent implements OnInit {
   commentInput = ''
   open = false;
 
-  constructor(private _bottomSheet: MatBottomSheet) { }
+  constructor(private _bottomSheet: MatBottomSheet) {
+  }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    let days = this.difference(new Date(), new Date(this.item.fechaFin))//new Date().getDay() - new Date(this.item.fechaFin).getDay()
+    console.log(days)
+  }
+
+  difference(date1: Date, date2: Date) {
+    if (date2 !== undefined) {
+      const date1utc = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
+      const date2utc = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
+      let day = 1000 * 60 * 60 * 24;
+      return (date2utc - date1utc) / day
+    } else {
+      return false;
+    }
+  }
 
   onOpenComment() {
     this.open = !this.open
@@ -39,8 +55,8 @@ export class BoardItemComponent implements OnInit {
   }
 
   onCardCopy(id: number) {
-    const objeto = { id, name};
-const objetoClonado = Object.assign({}, objeto);
+    const objeto = { id, name };
+    const objetoClonado = Object.assign({}, objeto);
   }
 
 }

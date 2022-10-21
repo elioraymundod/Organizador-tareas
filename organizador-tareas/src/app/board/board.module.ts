@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { BoardComponent } from './board/board.component';
 import { FormsModule } from '@angular/forms';
 
@@ -34,6 +34,6 @@ import { MaterialExampleModule } from 'src/material.module';
   ],
   exports: [
     BoardComponent
-  ],
+  ]
 })
 export class BoardModule { }
